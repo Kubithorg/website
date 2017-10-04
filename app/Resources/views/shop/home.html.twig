@@ -1,0 +1,37 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+    <div class="row">
+
+        <div class="col-md-6 col-sm-12">
+            <div class="card text-white bg-success" id="shop" style="cursor: pointer">
+                <div class="card-body">
+                    <h4 class="card-title">Achat boutique</h4>
+                    <p class="card-text">Faites un don et reçevez des items et des avantages en jeu.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="card text-white bg-info" id="free" style="cursor: pointer">
+                <div class="card-body">
+                    <h4 class="card-title">Don libre</h4>
+                    <p class="card-text">faites un don simple sans aucune contrepartie en jeu.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('#shop').click(function() {
+            window.location.replace("{{ path('shop_items') }}");
+        });
+
+        $('#free').click(function() {
+
+        });
+    </script>
+{% endblock %}

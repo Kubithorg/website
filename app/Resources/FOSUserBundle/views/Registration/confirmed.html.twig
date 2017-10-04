@@ -1,0 +1,18 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends "layout.html.twig" %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+
+            <h4>Créer un compte</h4><br>
+
+            {{ 'registration.confirmed'|trans({'%username%': user.username}) }}
+
+
+        </div>
+    </div>
+
+{% endblock content %}
+

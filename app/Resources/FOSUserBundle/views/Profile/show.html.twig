@@ -1,0 +1,132 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends "public/layout.html.twig" %}
+
+{% block breadcrumb %}
+    <div class="container">
+        <ul class="nk-breadcrumbs">
+            <li><a href="{{ url('home') }}">Accueil</a></li>
+            <li><span class="fa fa-angle-right"></span></li>
+            <li><span>Mon compte</span></li>
+        </ul>
+    </div>
+{% endblock breadcrumb %}
+
+{% block content %}
+
+    <style>
+        .nk-table td{
+            font-size: 14px;
+        }
+        .nk-table tbody tr {
+            background: #171E22;
+        }
+        .nk-feature-2 .nk-feature-icon {
+            padding: 0;
+        }
+        .nk-feature-2 .nk-feature-cont {
+           padding-bottom: 0;
+        }
+        .disabled {
+            opacity: 0.6;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="nk-box-2 bg-dark-2">
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h4>Bienvenue {{ user.username }}</h4>
+                        <div class="row vertical-gap" style="font-size: 14px;">
+                            <div class="col-lg-4">
+                                <div class="nk-feature-2" style="background-color: #171E22;">
+                                    <div class="nk-feature-icon">
+                                        <div class="nk-count h2 mb-0">{{ psc }}</div>
+                                    </div>
+                                    <div class="nk-feature-cont text-center" style="font-size: 14px;">
+                                        <h3 style="font-size: 16px;" class="nk-feature-title"><span class="text-main-1">{{ (psc > 1) ? 'PaySafeCards' : 'PaySafeCard' }}</span> en attente</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="nk-feature-2" style="background-color: #171E22;">
+                                    <div class="nk-feature-icon">
+                                        <div class="nk-count h2 mb-0">{{ user.money }}</div>
+                                    </div>
+                                    <div class="nk-feature-cont text-center" style="font-size: 14px;">
+                                        <h3 style="font-size: 16px;" class="nk-feature-title"><span class="text-main-1">Points</span> boutique</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="row vertical-gap" style="font-size: 14px;">
+                            <div class="col-lg-6">
+                                <div class="nk-feature-2" style="background-color: #171E22;">
+                                    <div class="nk-feature-cont text-center" style="font-size: 14px;">
+                                        <h3 style="font-size: 16px;" class="nk-feature-title"><a href="/user/profile/edit"><span class="text-main-1">Editer</span> mon profil</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="nk-feature-2" style="background-color: #171E22;">
+                                    <div class="nk-feature-cont text-center" style="padding-bottom: 0px;">
+                                        <h3 style="font-size: 16px;" class="nk-feature-title"><a href="/user/profile/change-password"><span class="text-main-1">Changer</span> mon mot de passe</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="nk-feature-2" style="background-color: #171E22;">
+                                    <div class="nk-feature-cont text-center" style="padding-bottom: 0px;">
+                                        <h3 style="font-size: 16px;" class="nk-feature-title"><a href="/user/profile/credit"><span class="text-main-1">Acheter</span> des points boutique</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="nk-feature-2" style="background-color: #171E22;">
+                                    <div class="nk-feature-cont text-center" style="padding-bottom: 0px;">
+                                        <h3 style="font-size: 16px;" class="nk-feature-title"><a href="{{ path('gc_pb_exchange') }}" data-toggle="tooltip" data-placement="bottom" title="Bientôt"><span class="text-main-1">Echanger</span> des points boutique</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="nk-feature-2" style="background-color: #171E22;">
+                                    <div class="nk-feature-cont text-center" style="padding-bottom: 0px;">
+                                        <h3 style="font-size: 16px;" class="nk-feature-title"><a href="{{ path('gc_skin_change') }}"><span class="text-main-1">Changer</span> de skin</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="nk-feature-2" style="background-color: #171E22;">
+                                    <div class="nk-feature-cont text-center" style="padding-bottom: 0px;">
+                                        <h3 style="font-size: 16px;" class="nk-feature-title"><a href="{{ path('gc_cape_change') }}"><span class="text-main-1">Changer</span> de cape</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="nk-gap-6"></div>
+
+{% endblock content %}

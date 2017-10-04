@@ -1,7 +1,12 @@
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /admin
+
 kubithon_shop:
     resource: "@KubithonShopBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /shop
 
 app:
     resource: '@AppBundle/Controller/'

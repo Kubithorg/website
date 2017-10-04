@@ -18,8 +18,71 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $crack;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $uuid;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $balance;
+
     public function __construct()
     {
         parent::__construct();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBalance()
+    {
+        return $this->balance;
+    }
+
+    /**
+     * @param mixed $balance
+     */
+    public function setBalance($balance)
+    {
+        $this->balance = $balance;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCrack()
+    {
+        return $this->crack;
+    }
+
+    /**
+     * @param mixed $crack
+     */
+    public function setCrack($crack)
+    {
+        $this->crack = $crack;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+
+    /**
+     * @param mixed $uuid
+     */
+    public function setUuid($uuid)
+    {
+        $this->uuid = $uuid;
     }
 }

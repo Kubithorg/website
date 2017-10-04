@@ -1,4 +1,0 @@
-services:
-#    kubithon_shop.example:
-#        class: Kubithon\ShopBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]

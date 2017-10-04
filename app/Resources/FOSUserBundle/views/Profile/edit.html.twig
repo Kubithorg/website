@@ -1,0 +1,36 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends "public/layout.html.twig" %}
+
+{% block content %}
+    <style>
+        .center-container{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+    <div class="center-container row vertical-gap text-white">
+
+        <div class="col-md-6">
+            <div class="nk-box-2 bg-dark-2">
+
+                <h4 class="mb-0">Editer mon compte</h4><br>
+
+                {{ form_start(form, { 'action': path('fos_user_profile_edit') }) }}
+                {{ form_widget(form) }}
+                <div class="nk-gap-1"></div>
+                <div class="form-group text-right">
+                    <input type="submit" class="nk-btn nk-btn-rounded nk-btn-color-white" value="{{ 'profile.edit.submit'|trans }}" />
+                </div>
+                {{ form_end(form) }}
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="nk-gap-6"></div>
+
+{% endblock content %}
