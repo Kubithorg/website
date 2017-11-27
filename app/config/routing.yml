@@ -1,3 +1,8 @@
+kubithon_api:
+    resource: "@KubithonApiBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 easy_admin_bundle:
     resource: "@EasyAdminBundle/Controller/"
     type:     annotation
