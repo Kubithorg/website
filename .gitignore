@@ -18,4 +18,4 @@
 /.idea/
 /website.iml
 
-kubithon.sqlite
+*.sqlite
