@@ -2,12 +2,21 @@
 
 {% block content %}
 
+    {% if app.user %}
         <div class="col">
             <div class="row align-items-center lead">
                 <div class="col-auto mr-auto">Bonjour <strong>{{ app.user.username }}</strong>, tu dispose de {{ app.user.balance }}€ sur ton compte</div>
                 <div class="col-auto"><a class="btn btn-sm btn-dark" href="">Créditer mon compte</a></div>
             </div>
         </div>
+    {% else %}
+        <div class="col">
+            <div class="row align-items-center lead">
+                <div class="col-auto mr-auto">Bienvenue dans la boutique, pour acheter connecte toi.</div>
+                <div class="col-auto"><a class="btn btn-sm btn-dark" href="{{ path('fos_user_security_login') }}">Connexion</a></div>
+            </div>
+        </div>
+    {% endif %}
     <hr>
     <div class="row">
 
@@ -24,7 +33,7 @@
                         <small class="text-muted">
                             <div class="row align-items-center">
                                 <div class="col-auto mr-auto"><strong>3€</strong></div>
-                                <div class="col-auto"><a class="btn btn-sm btn-dark payment" href="" data-name="{{ item.name }}" data-price="{{ item.price }}€" data-id="{{ item.id }}">Acheter</a></div>
+                                <div class="col-auto"><a class="btn btn-sm btn-dark payment {% if not app.user %}disabled{% endif %}" href="" data-name="{{ item.name }}" data-price="{{ item.price }}€" data-id="{{ item.id }}">Acheter</a></div>
                             </div>
                         </small>
                     </div>
@@ -41,6 +50,7 @@
 
 {% block javascripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.1/sweetalert2.all.min.js"></script>
+    {% if app.user %}
     <script>
         $('.payment').click(function (event) {
             event.preventDefault();
@@ -65,4 +75,5 @@
             })
         });
     </script>
+    {%  endif %}
 {% endblock %}

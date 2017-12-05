@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Vich\UploaderBundle\VichUploaderBundle(),
             new AppBundle\AppBundle(),
             new Kubithon\ShopBundle\KubithonShopBundle(),
+            new Kubithon\ApiBundle\KubithonApiBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
