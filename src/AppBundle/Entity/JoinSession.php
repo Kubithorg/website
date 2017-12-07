@@ -28,7 +28,17 @@ class JoinSession
     private $serverId;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Session", mappedBy="session")
+     * @ORM\Column(type="string")
+     */
+    private $ip;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $username;
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Session", mappedBy="joinSession")
      */
     private $session;
 
@@ -94,6 +104,38 @@ class JoinSession
     public function setServerId($serverId)
     {
         $this->serverId = $serverId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    /**
+     * @param mixed $ip
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
     }
 
 }

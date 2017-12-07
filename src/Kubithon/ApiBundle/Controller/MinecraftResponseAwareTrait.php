@@ -33,4 +33,27 @@ trait MinecraftResponseAwareTrait
         return $this->errorResponse('Forbidden', 'Access denied', 403);
     }
 
+    public function profile($username, $uuid)
+    {
+        $payload = base64_encode(json_encode([
+            'timestamp' => time(),
+            'profileId' => $uuid,
+            'profileName' => $username,
+            "signatureRequired" => false,
+            'textures' => [
+                'SKIN' => [
+                    'url' => 'https://i.kubithon.org/char.png'
+                ]
+            ]
+        ]));
+
+        return [
+            'properties' => [
+                'name' => 'textures',
+                'value' => $payload
+            ]
+        ];
+
+    }
+
 }
