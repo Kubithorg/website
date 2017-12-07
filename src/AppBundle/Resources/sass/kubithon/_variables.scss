@@ -1,0 +1,26 @@
+//$primary: #128292;
+//$primary: #8EBAC1;
+$primary: #0D7685;
+$page-background: #242423;
+
+$info: #8EBAC1;
+$dark: #242423;
+
+$join-links-color: darken($primary, 20%);
+
+$family-sans-serif: 'Raleway', $family-sans-serif;
+
+$body-size: 14px;
+
+$title-size: 8rem;
+$title-weight: $weight-light;
+$title-font: 'Raleway';
+
+$subtitle-size: 3rem;
+
+$divider-word-background-color: $primary;
+$divider-color: $white;
+$divider-background-color: rgba(256, 256, 256, .4);
+$divider-font-size: 1.4rem;
+
+$fa-font-path: '../fonts/FontAwesome';

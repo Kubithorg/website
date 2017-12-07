@@ -1,0 +1,6 @@
+[submodule "src/AppBundle/Resources/sass/bulma"]
+	path = src/AppBundle/Resources/sass/bulma
+	url = https://github.com/jgthms/bulma.git
+[submodule "src/AppBundle/Resources/sass/bulma-divider"]
+	path = src/AppBundle/Resources/sass/bulma-divider
+	url = https://github.com/Wikiki/bulma-divider

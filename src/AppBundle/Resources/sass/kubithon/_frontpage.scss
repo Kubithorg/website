@@ -1,0 +1,289 @@
+.title-date {
+	margin-top: -20px;
+	font-size: 2em;
+}
+
+
+.hero-head {
+	background-color: #fff;
+
+	header {
+		.navbar-brand {
+			font-size: 2.5em;
+
+			img.navbar-brand-logo {
+				height: 1.6em;
+				max-height: 2em; // Required because Bulma sets a max-height
+			}
+		}
+
+		.kubithon-chapo {
+			color: #000;
+			font-size: 1.3em;
+			font-weight: bold;
+
+			text-align: right;
+		}
+	}
+}
+
+.hero-body {
+	background:
+		url('../images/bg_hero_bottomleft.png') bottom left no-repeat,
+		url('../images/bg_hero_topleft.png') top left no-repeat,
+		url('../images/bg_hero_topright.png') top right no-repeat,
+		url('../images/bg_hero_topmiddle.png') 25% -2em no-repeat;
+}
+
+.donation {
+	margin-top: 2em;
+	font-size: 2.5em;
+
+	vertical-align: middle;
+
+	.donation-amount {
+		color: darken($dark, 20%);
+		font-size: 1.2em;
+
+		span {
+			font-size: 1.6em;
+			display: block;
+			margin-bottom: .5em;	
+		}
+	}
+
+	button.button {
+		font-size: 2rem;
+		margin-top: 1.4em;
+	}
+
+	.goals {
+		padding-top: 2em;
+
+		p {
+			font-size: .65em;
+			position: relative;
+			top: -.3em;
+		}
+
+		ul.progress-goals {
+			margin: 0;
+			min-height: 3.5em;
+
+			li {
+				position: absolute;
+				text-align: left;
+				width: 20rem;
+
+				&:before {
+					content: '';
+					height: .6em;
+					border-left: solid 1px $dark;
+
+					position: absolute;
+					top: -.4em;
+				}
+
+				&.right-tick:before {
+					left: 99%;
+				}
+
+				&:not(:first-child) p.next-objective {
+					display: none;
+				}
+
+				&:first-child {
+					> span {
+						display: none;
+					}
+
+					aside {
+						display: block;
+						color: darken($dark, 15%);
+
+						h4 {
+							font-weight: bold;
+						}
+						p {
+							font-size: .666em;
+							font-weight: 300;
+
+							&.next-objective {
+								.fa {
+									display: inline-block;
+									padding-right: .6em;
+								}
+							}
+						}
+					}
+				}
+
+				> span {
+					display: inline-block;
+					position: absolute;
+					top: .35em;
+					left: -0.23em;
+
+					width: 8px;
+					height: 8px;
+					margin: 5px;
+
+					background-color: $dark;
+
+					cursor: pointer;
+
+					$goal-dot-trans: .12s ease-in;
+					$goal-dot-trans-out: .18s ease-in;
+
+					&:before {
+						content: '';
+						position: absolute;
+
+						left: -5px;
+						top: -5px;
+
+						width: 18px;
+						height: 18px;
+
+						border: solid $dark 1px;
+
+						transition:
+							border-color $goal-dot-trans-out,
+							left $goal-dot-trans-out, top $goal-dot-trans-out,
+							width $goal-dot-trans-out, height $goal-dot-trans-out,
+							transform $goal-dot-trans-out;
+					}
+
+					&:hover:before {
+						border-color: transparent;
+
+						left: -26px;
+						top: -26px;
+
+						width: 60px;
+						height: 60px;
+
+						transition:
+							border-color $goal-dot-trans,
+							left $goal-dot-trans, top $goal-dot-trans,
+							width $goal-dot-trans, height $goal-dot-trans,
+							transform $goal-dot-trans;
+					}
+
+					&:hover + aside {
+						display: block;
+						position: absolute;
+
+						left: -.22em;
+						top: .86em;
+
+						z-index: 10000;
+
+						color: #222;
+
+						background: #fff;
+						border: solid 1px $dark;
+						padding: 5px;
+
+						div {
+							padding: .3em .6em;
+							background-color: #fff;
+							border-color: $dark;
+						}
+					}
+				}
+
+				aside {
+					display: none;
+
+					h4 {
+						font-size: .8em;
+					}
+					p {
+						font-size: .55em;
+					}
+				}
+
+				&:nth-child(2n) {
+					&:before {
+						top: -1.8em;
+					}
+
+					> span {
+						top: -2.58em;
+
+						&:hover + aside {
+							top: -2.09em;
+							left: -.22em;
+						}
+					}
+				}
+
+				&.right-tick {
+					left: -20rem;
+					text-align: right;
+
+					> span {
+						left: unset;
+						right: -.2em;
+
+						&:hover + aside {
+							left: unset;
+							right: -.21em;
+							div {
+								padding: .3em .6em;
+								background-color: #fff;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	a.button.is-donation {
+		display: inline-block;
+
+		font-size: 1em;
+		height: 3.4em;
+
+		span {
+			display: block ;
+			font-size: .7em;
+		}
+	}
+}
+
+
+.hero-foot {
+	margin-bottom: 1em;
+	padding-top: .8em;
+	font-size: 2em;
+	border-top: 1px solid rgba(256, 256, 256, .4);
+
+	&.kubithon-home-foot {
+		padding-top: 0;
+		padding-bottom: .3em;
+		margin-bottom: 0;
+
+		color: #fff;
+		background-color: $join-links-color;
+
+		.columns {
+			margin-top: -1rem;
+
+			a.column {
+				padding-top: 2.6rem;
+				color: #fff;
+			}
+		}
+
+		.is-divider[data-content]::after, .is-divider-vertical[data-content]::after {
+			background-color: $join-links-color;
+			top: 57%;
+		}
+		.is-divider-vertical::before {
+			bottom: 0;
+		}
+	}
+}
