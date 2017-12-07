@@ -20,3 +20,4 @@
 
 *.sqlite
 .sass-cache
+/src/AppBundle/Resources/

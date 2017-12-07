@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,6 +31,13 @@ class Session
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", mappedBy="session")
      */
     private $user;
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\JoinSession", inversedBy="session", cascade={"remove"})
+     * @ORM\JoinColumn(name="join_session_id", referencedColumnName="id", nullable=true)
+     */
+    private $joinSession;
+
 
     /**
      * @return mixed
@@ -95,6 +101,22 @@ class Session
     public function setUser($user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getJoinSession()
+    {
+        return $this->joinSession;
+    }
+
+    /**
+     * @param mixed $joinSession
+     */
+    public function setJoinSession($joinSession)
+    {
+        $this->joinSession = $joinSession;
     }
 
 }

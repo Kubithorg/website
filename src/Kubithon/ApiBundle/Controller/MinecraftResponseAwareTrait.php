@@ -25,12 +25,12 @@ trait MinecraftResponseAwareTrait
 
     public function errorInvalidCredentialsResponse()
     {
-        return $this->errorResponse('Identifiants invalides',' Le nom d\'utilisateur ou le mot de passe est invalide', Response::HTTP_FORBIDDEN);
+        return $this->errorResponse('Identifiants invalides', ' Le nom d\'utilisateur ou le mot de passe est invalide', Response::HTTP_UNAUTHORIZED);
     }
 
     public function errorForbidenResponse()
     {
-        return $this->errorResponse('','',403);
+        return $this->errorResponse('Forbidden', 'Access denied', 403);
     }
 
 }
