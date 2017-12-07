@@ -2,25 +2,25 @@
 
 namespace Kubithon\ApiBundle\Controller;
 
-
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 trait MinecraftResponseAwareTrait
 {
-    public function errorResponse($error, $message, $code)
+    public function errorBadRequestResponse()
     {
-        $datas = [
-            'error' => $error,
-            'errorMessage' => $message
-        ];
-
-        return new JsonResponse($datas, $code);
+        throw new BadRequestHttpException('The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method');
     }
 
-    public function errorMediaTypeResponse()
+    public function errorAccessDeniedResponse()
     {
-        return $this->errorResponse('Unsupported Media Type','The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method', Response::HTTP_UNSUPPORTED_MEDIA_TYPE);
+        throw new AccessDeniedException(' Invalid credentials. Invalid username or password. ');
+    }
+
+    public function errorForbidenResponse()
+    {
+        throw new AccessDeniedHttpException();
     }
 
 }

@@ -1,7 +1,7 @@
 kubithon_api:
     resource: "@KubithonApiBundle/Controller/"
     type:     annotation
-    prefix:   /api
+    prefix:   /
 
 easy_admin_bundle:
     resource: "@EasyAdminBundle/Controller/"

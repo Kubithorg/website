@@ -33,6 +33,12 @@ class User extends BaseUser
      */
     private $balance;
 
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Session", inversedBy="user")
+     * @ORM\JoinColumn(name="session_id", referencedColumnName="id", nullable=true)
+     */
+    private $session;
+
     public function __construct()
     {
         parent::__construct();
@@ -85,4 +91,22 @@ class User extends BaseUser
     {
         $this->uuid = $uuid;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSession()
+    {
+        return $this->session;
+    }
+
+    /**
+     * @param $session
+     */
+    public function setSession($session)
+    {
+        $this->session = $session;
+    }
+
+
 }
