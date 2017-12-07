@@ -41,36 +41,3 @@ function forEachElement(selector, fn)
     fn(elements[i], i);
 }
 
-
-(function()
-{
-	'use strict';
-/*
-	forEachElement('ul.progress-goals li > span', function(goal_anchor, i)
-	{
-		goal_anchor.addEventListener('mouseover', function(e)
-		{
-			var target_detail_box = this.nextElementSibling;
-
-			forEachElement('ul.progress-goals li aside.is-active', function(detail_box, i)
-			{
-				if (detail_box != target_detail_box)
-					detail_box.classList.remove('is-active');
-			});
-
-			this.nextElementSibling.classList.toggle('is-active');
-		});
-	});
-
-	document.addEventListener('click', function (e)
-	{
-	    if (!getClosest(e.target, 'ul.progress-goals li aside.is-active, ul.progress-goals li > span'))
-	    {
-	        forEachElement('ul.progress-goals li aside.is-active', function(detail_box, i)
-			{
-				detail_box.classList.remove('is-active');
-			});
-	    }
-	}, false);
-	*/
-})();

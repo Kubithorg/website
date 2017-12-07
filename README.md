@@ -15,7 +15,7 @@ Ensuite :
 ```bash
 composer install
 php bin/console doctrine:database:create
-php bin/console doctrine:schema:update --force
+php bin/console doctrine:schema:create  # ou :update --force si mise à jour
 
 # Important en développement !
 php bin/console assets:install --symlink

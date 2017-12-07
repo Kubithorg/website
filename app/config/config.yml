@@ -144,3 +144,38 @@ easy_admin:
                 title: 'Supprimer un produit'
                 fields:
                      - { property: 'id', label: 'Id', type_options: { disabled: true } }
+
+        Goal:
+            label: 'Objectifs de dons'
+            class: AppBundle\Entity\Goal
+            list:
+                title: 'Liste des objectifs'
+                fields:
+                    - 'id'
+                    - { property: 'amount', label: 'Montant minimal' }
+                    - { property: 'title', label: 'Titre' }
+                    - { property: 'description', label: 'Description' }
+                    - { property: 'achieved', label: 'Atteint', type: 'toggle' }
+
+            new:
+                title: 'Nouvel objectif (sera affiché en direct)'
+                fields:
+                    - { property: 'title', label: 'Titre' }
+                    - { property: 'amount', label: 'Montant minimal' }
+                    - { property: 'description', label: 'Description' }
+                    - { property: 'achievedMessage', label: "Message affiché lorsqu'atteint" }
+                    - { property: 'achievedLongmessage', label: "Message détaillé lorsqu'atteint" }
+
+            edit:
+                title: 'Modifier un objectif (sera mis à jour en direct)'
+                fields:
+                    - { property: 'title', label: 'Titre' }
+                    - { property: 'amount', label: 'Montant minimal' }
+                    - { property: 'description', label: 'Description' }
+                    - { property: 'achievedMessage', label: "Message affiché lorsqu'atteint" }
+                    - { property: 'achievedLongmessage', label: "Message détaillé lorsqu'atteint" }
+
+            delete:
+                title: 'Supprimer un objectif (sera retiré en direct)'
+                fields:
+                     - { property: 'id', label: 'ID', type_options: { disabled: true } }

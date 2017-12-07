@@ -1,5 +1,97 @@
 {% extends 'layout.html.twig' %}
 
+{% block hero_classes %}is-fullheight is-bold{% endblock %}
+{% block hero_classes_foot %}kubithon-home-foot{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/homepage.js') }}"></script>
+{% endblock %}
+
+{% block hero_body %}
+    <div class="container has-text-centered main-title donation">
+        <p class="donation-amount">Grâce à vous, nous avons déjà récolté <span>184 221 €</span></p>
+        <div class="goals">
+            <progress class="progress is-success" value="6" max="100">184 221 €</progress>
+            <ul class="progress-goals">
+                <li style="margin-left: 8%;">
+                    <span aria-hidden="true"></span>
+                    <aside>
+                        <div>
+                            <h4>185 000 € <span class="fa fa-rocket"></span></h4>
+                            <p>On envoie du thon en cube à un donnateur au hasard</p>
+                        </div>
+                    </aside>
+                </li>
+                <li style="margin-left: 21%;">
+                    <span aria-hidden="true"></span>
+                    <aside>
+                        <div>
+                            <h4>185 000 € <span class="fa fa-rocket"></span></h4>
+                            <p>On envoie du thon en cube à un donnateur au hasard</p>
+                        </div>
+                    </aside>
+                </li>
+                <li style="margin-left: 34%;">
+                    <span aria-hidden="true"></span>
+                    <aside>
+                        <div>
+                            <h4>190 000 € <span class="fa fa-rocket"></span></h4>
+                            <p>Toute l'équipe chante <em>On va s'aimer</em> de Gilbert Montagnier !</p>
+                        </div>
+                    </aside>
+                </li>
+                <li style="margin-left: 52%;">
+                    <span aria-hidden="true"></span>
+                    <aside>
+                        <div>
+                            <h4>190 000 € <span class="fa fa-rocket"></span></h4>
+                            <p>Toute l'équipe chante <em>On va s'aimer</em> de Gilbert Montagnier !</p>
+                        </div>
+                    </aside>
+                </li>
+                <li style="margin-left: 65%;">
+                    <span aria-hidden="true"></span>
+                    <aside>
+                        <div>
+                            <h4>195 000 € <span class="fa fa-rocket"></span></h4>
+                            <p>???</p>
+                        </div>
+                    </aside>
+                </li>
+                <li style="margin-left: 82%;" class="right-tick">
+                    <span aria-hidden="true"></span>
+                    <aside>
+                        <div>
+                            <h4>195 000 € <span class="fa fa-rocket"></span></h4>
+                            <p>???</p>
+                        </div>
+                    </aside>
+                </li>
+                <li style="margin-left: 100%;" class="right-tick">
+                    <span aria-hidden="true"></span>
+                    <aside>
+                        <div>
+                            <h4>200 000 € <span class="fa fa-rocket"></span></h4>
+                            <p>UN GROS TRUC</p>
+                        </div>
+                    </aside>
+                </li>
+            </ul>
+        </div>
+        <button class="button is-primary is-large is-outlined">
+            Donner pour le Téléthon
+        </button>
+    </div>
+{% endblock %}
+
+{% block hero_foot %}
+    <div class="columns">
+        <a class="column has-text-centered"><p>Rejoignez le concert sur Minecraft</p></a>
+        <div class="is-divider-vertical" data-content="OU"></div>
+        <a class="column has-text-centered"><p>Suivez l'événement en Live !</p></a>
+    </div>
+{% endblock %}
+
 {%  block content %}
-<img src="{{ asset('bundles/app/images/bg_hero_bottomleft.png') }}" alt="{{ asset('bundles/app/images/bg_hero_bottomleft.png') }}" />
+    <h1>Pomf</h1>
 {% endblock %}
