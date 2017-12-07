@@ -62,13 +62,13 @@ class AuthServerController extends Controller
 
         $user = $user_manager->findUserByUsername($user);
 
-        if ($user == null)
-            $this->errorInvalidCredentialsResponse();
+        if (!$user)
+            return $this->errorInvalidCredentialsResponse();
 
         $encoder = $factory->getEncoder($user);
 
         if(!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt()))
-            $this->errorInvalidCredentialsResponse();
+            return $this->errorInvalidCredentialsResponse();
 
         if($user->getSession()) {
 
@@ -122,7 +122,7 @@ class AuthServerController extends Controller
         $clientToken = $request->clientToken ?? null;
 
         if (!$accessToken || !$clientToken)
-            $this->errorBadRequestResponse();
+            return $this->errorBadRequestResponse();
 
         $em = $this->getDoctrine()->getManager();
         $session = $em
@@ -130,7 +130,7 @@ class AuthServerController extends Controller
             ->findOneBy(['access' => $accessToken, 'client' => $clientToken]);
 
         if (!$session)
-            $this->errorInvalidCredentialsResponse();
+            return $this->errorInvalidCredentialsResponse();
 
         $session->setAccess($this->genUuid());
         $session->setClient($clientToken);
@@ -163,7 +163,7 @@ class AuthServerController extends Controller
         $clientToken = $request->clientToken ?? null;
 
         if (!$accessToken || !$clientToken)
-            $this->errorBadRequestResponse();
+            return $this->errorBadRequestResponse();
 
         $em = $this->getDoctrine()->getManager();
         $session = $em
@@ -171,7 +171,7 @@ class AuthServerController extends Controller
             ->findOneBy(['access' => $accessToken, 'client' => $clientToken]);
 
         if (!$session)
-            $this->errorForbidenResponse();
+            return $this->errorForbidenResponse();
 
         return new Response(null, 204);
     }
@@ -190,7 +190,7 @@ class AuthServerController extends Controller
         $password = $request->password ?? null;
 
         if (!$user || !$password)
-            $this->errorBadRequestResponse();
+            return $this->errorBadRequestResponse();
 
         $user_manager = $this->get('fos_user.user_manager');
         $factory = $this->get('security.encoder_factory');
@@ -199,12 +199,12 @@ class AuthServerController extends Controller
         $user = $user_manager->findUserByUsername($user);
 
         if($user === null)
-            $this->errorInvalidCredentialsResponse();
+            return $this->errorInvalidCredentialsResponse();
 
         $encoder = $factory->getEncoder($user);
 
         if(!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt()))
-            $this->errorInvalidCredentialsResponse();
+            return $this->errorInvalidCredentialsResponse();
 
         $session = $user->getSession();
 
@@ -236,7 +236,7 @@ class AuthServerController extends Controller
         $clientToken = $request->clientToken ?? null;
 
         if (!$accessToken || !$clientToken)
-            $this->errorForbidenResponse();
+            return $this->errorForbidenResponse();
 
         $em = $this->getDoctrine()->getManager();
         $session = $em
@@ -244,7 +244,7 @@ class AuthServerController extends Controller
             ->findOneBy(['access' => $accessToken, 'client' => $clientToken]);
 
         if (!$session)
-            $this->errorInvalidCredentialsResponse();
+            return $this->errorInvalidCredentialsResponse();
 
         $user = $session->getUser();
         $user_manager = $this->get('fos_user.user_manager');
