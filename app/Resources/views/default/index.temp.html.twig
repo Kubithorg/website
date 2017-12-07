@@ -1,0 +1,19 @@
+{% extends 'layout.html.twig' %}
+
+{% block hero_classes %}is-fullheight is-bold{% endblock %}
+{% block hero_classes_foot %}kubithon-home-foot{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/homepage.js') }}"></script>
+{% endblock %}
+
+{% block hero_body %}
+    <div class="container has-text-centered main-title donation">
+        <p class="donation-amount">Le Kubithon est proche !</p>
+        <p style="margin-bottom: 3em;">Revenez vite pour participer à ce grand événement sur Minecraft au profit du Téléthon…</p>
+
+        <a href="https://soutenir.afm-telethon.fr/kubithon" class="button is-primary is-large" style="font-size: 1em;">
+            Donner (déjà) pour le Téléthon
+        </a>
+    </div>
+{% endblock %}

@@ -11600,6 +11600,10 @@ label.panel-block:hover {
   font-weight: normal;
   font-style: normal;
 }
+.button .is-primary {
+  transition: background-color 125ms ease-in-out, color 125ms ease-in-out;
+}
+
 header.navbar {
   border-bottom: solid 5px #3e3e3c;
 }
