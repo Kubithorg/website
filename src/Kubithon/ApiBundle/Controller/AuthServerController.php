@@ -62,7 +62,7 @@ class AuthServerController extends Controller
 
         $user = $user_manager->findUserByUsername($user);
 
-        if($user === null)
+        if ($user == null)
             $this->errorInvalidCredentialsResponse();
 
         $encoder = $factory->getEncoder($user);
