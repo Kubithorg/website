@@ -100,29 +100,17 @@ class SessionServerController extends Controller
         $username = $request->get('username') ?? null;
         $serverId = $request->get('serverId') ?? null;
 
-        $mojangResponse = file_get_contents('https://api.mojang.com/users/profiles/minecraft/' . $username . '?at=0');
-        $mojangResponse = json_decode($mojangResponse);
+             
+        $em = $this->getDoctrine()->getManager();
 
-        dump($mojangResponse);
-        
-        if (isset($mojangResponse->name)) {
-            $mojangResponse = file_get_contents("https://sessionserver.mojang.com/session/minecraft/hasJoined?username=$username&serverId=$serverId");
-           die(dump($mojangResponse));
-            return new Response($mojangResponse);
+        $joinSession = $em
+            ->getRepository(JoinSession::class)
+            ->findOneBy([
+                'username' => $username,
+                'serverId' => $serverId
+            ]);
 
-        } else {
-            $em = $this->getDoctrine()->getManager();
-
-            $joinSession = $em
-                ->getRepository(JoinSession::class)
-                ->findOneBy([
-                    //         'ip' => $ip,
-                    'username' => $username,
-                    'serverId' => $serverId
-                ]);
-
-            if (!$joinSession)
-                return new Response();
+        if ($joinSession) {
 
             $uuid = $joinSession->getSession()->getUser()->getUuid();
 
@@ -140,10 +128,27 @@ class SessionServerController extends Controller
                 'id' => $uuid,
                 'name' => $username,
                 'properties' => [$this->profile($username, $uuid)]
-
             ]);
+
+        } else {
+            $mojangResponse = file_get_contents('https://api.mojang.com/users/profiles/minecraft/' . $username . '?at=0');
+            $mojangResponse = json_decode($mojangResponse);
+
+            echo "Pseudo :"
+            dump($mojangResponse);
+
+            if (isset($mojangResponse->name)) {
+                $mojangResponse = file_get_contents("https://sessionserver.mojang.com/session/minecraft/hasJoined?username=$username&serverId=$serverId");
+                echo "Mojang : "
+               die(dump($mojangResponse));
+                return new Response($mojangResponse);
+
+            }
         }
 
+
+        return new Response();
+            
     }
 
 }
