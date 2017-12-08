@@ -133,7 +133,7 @@ class SessionServerController extends Controller
 
             return new JsonResponse([
                 'id' => $uuid,
-                'username' => $username,
+                'name' => $username,
                 'properties' => $this->profile($username, $uuid)
 
             ]);
