@@ -21,7 +21,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/home", name="homepage")
+     * @Route("/", name="homepage")
      */
     public function indexAction(Request $request)
     {
@@ -63,9 +63,6 @@ class DefaultController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/", name="homepage_temp")
-     */
     public function indexTempAction(Request $request)
     {
         return $this->render('default/index.temp.html.twig', [
