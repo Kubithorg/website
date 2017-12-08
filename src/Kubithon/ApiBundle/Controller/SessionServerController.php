@@ -105,6 +105,7 @@ class SessionServerController extends Controller
 
         if (isset($mojangResponse->name)) {
             $mojangResponse = file_get_contents("https://sessionserver.mojang.com/session/minecraft/hasJoined?username=$username&serverId=$serverId");
+           die(dump($mojangResponse));
             return new Response($mojangResponse);
 
         } else {
