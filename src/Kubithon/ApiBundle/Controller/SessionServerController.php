@@ -24,7 +24,7 @@ class SessionServerController extends Controller
     /**
      * @Route("/join")
      * @Method("POST")
-     * @param Request $request
+     * @param Request $req
      * @return Response
      */
     public function joinAction(Request $req)
@@ -96,11 +96,9 @@ class SessionServerController extends Controller
     public function hasJoinedAction(Request $request)
     {
 
-        //  $request = $this->parseRequest($request);
 
         $username = $request->get('username') ?? null;
         $serverId = $request->get('serverId') ?? null;
-        // $ip = $request->get('ip') ?? null;
 
         $mojangResponse = file_get_contents('https://api.mojang.com/users/profiles/minecraft/' . $username . '?at=0');
         $mojangResponse = json_decode($mojangResponse);
@@ -145,6 +143,5 @@ class SessionServerController extends Controller
         }
 
     }
-
 
 }
