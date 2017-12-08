@@ -4,8 +4,8 @@ namespace Kubithon\ApiBundle\Controller;
 
 use AppBundle\Entity\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 class AuthServerController extends Controller
 {
     use MinecraftResponseAwareTrait;
+    use MinecraftRequestAwareTrait;
 
     /**
      * @Route("/")
@@ -47,9 +48,11 @@ class AuthServerController extends Controller
     public function authenticateAction(Request $request)
     {
 
-        $password = $request->get('password');
-        $user = $request->get('username');
-        $clientToken = $request->get('clientToken');
+        $request = $this->parseRequest($request);
+
+        $user = $request->username ?? null;
+        $password = $request->password ?? null;
+        $clientToken = $request->clientToken ?? null;
 
         if (!$user || !$password || !$clientToken)
             return $this->errorBadRequestResponse();
@@ -57,17 +60,15 @@ class AuthServerController extends Controller
         $user_manager = $this->get('fos_user.user_manager');
         $factory = $this->get('security.encoder_factory');
 
-        $user = $request->get('username');
         $user = $user_manager->findUserByUsername($user);
 
-        if($user === null)
-            $this->errorInvalidCredentialsResponse();
+        if (!$user)
+            return $this->errorInvalidCredentialsResponse();
 
-        $password = $request->get('password');
         $encoder = $factory->getEncoder($user);
 
         if(!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt()))
-            $this->errorInvalidCredentialsResponse();
+            return $this->errorInvalidCredentialsResponse();
 
         if($user->getSession()) {
 
@@ -115,11 +116,13 @@ class AuthServerController extends Controller
      */
     public function refreshAction(Request $request)
     {
-        $accessToken = $request->get('accessToken');
-        $clientToken = $request->get('clientToken');
+        $request = $this->parseRequest($request);
+
+        $accessToken = $request->accessToken ?? null;
+        $clientToken = $request->clientToken ?? null;
 
         if (!$accessToken || !$clientToken)
-            $this->errorBadRequestResponse();
+            return $this->errorBadRequestResponse();
 
         $em = $this->getDoctrine()->getManager();
         $session = $em
@@ -127,7 +130,7 @@ class AuthServerController extends Controller
             ->findOneBy(['access' => $accessToken, 'client' => $clientToken]);
 
         if (!$session)
-            $this->errorInvalidCredentialsResponse();
+            return $this->errorInvalidCredentialsResponse();
 
         $session->setAccess($this->genUuid());
         $session->setClient($clientToken);
@@ -154,11 +157,13 @@ class AuthServerController extends Controller
      */
     public function validateAction(Request $request)
     {
-        $accessToken = $request->get('accessToken');
-        $clientToken = $request->get('clientToken');
+        $request = $this->parseRequest($request);
+
+        $accessToken = $request->accessToken ?? null;
+        $clientToken = $request->clientToken ?? null;
 
         if (!$accessToken || !$clientToken)
-            $this->errorBadRequestResponse();
+            return $this->errorBadRequestResponse();
 
         $em = $this->getDoctrine()->getManager();
         $session = $em
@@ -166,7 +171,7 @@ class AuthServerController extends Controller
             ->findOneBy(['access' => $accessToken, 'client' => $clientToken]);
 
         if (!$session)
-            $this->errorForbidenResponse();
+            return $this->errorForbidenResponse();
 
         return new Response(null, 204);
     }
@@ -179,26 +184,27 @@ class AuthServerController extends Controller
      */
     public function signoutAction(Request $request)
     {
-        $password = $request->get('password');
-        $user = $request->get('username');
+        $request = $this->parseRequest($request);
+
+        $user = $request->username ?? null;
+        $password = $request->password ?? null;
 
         if (!$user || !$password)
-            $this->errorBadRequestResponse();
+            return $this->errorBadRequestResponse();
 
         $user_manager = $this->get('fos_user.user_manager');
         $factory = $this->get('security.encoder_factory');
 
-        $user = $request->get('username');
+
         $user = $user_manager->findUserByUsername($user);
 
         if($user === null)
-            $this->errorInvalidCredentialsResponse();
+            return $this->errorInvalidCredentialsResponse();
 
-        $password = $request->get('password');
         $encoder = $factory->getEncoder($user);
 
         if(!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt()))
-            $this->errorInvalidCredentialsResponse();
+            return $this->errorInvalidCredentialsResponse();
 
         $session = $user->getSession();
 
@@ -224,11 +230,13 @@ class AuthServerController extends Controller
      */
     public function invalidateAction(Request $request)
     {
-        $accessToken = $request->get('accessToken');
-        $clientToken = $request->get('clientToken');
+        $request = $this->parseRequest($request);
+
+        $accessToken = $request->accessToken ?? null;
+        $clientToken = $request->clientToken ?? null;
 
         if (!$accessToken || !$clientToken)
-            $this->errorForbidenResponse();
+            return $this->errorForbidenResponse();
 
         $em = $this->getDoctrine()->getManager();
         $session = $em
@@ -236,7 +244,7 @@ class AuthServerController extends Controller
             ->findOneBy(['access' => $accessToken, 'client' => $clientToken]);
 
         if (!$session)
-            $this->errorInvalidCredentialsResponse();
+            return $this->errorInvalidCredentialsResponse();
 
         $user = $session->getUser();
         $user_manager = $this->get('fos_user.user_manager');

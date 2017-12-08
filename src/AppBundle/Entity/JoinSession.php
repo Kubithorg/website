@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="sessions")
+ * @ORM\Table(name="join_sessions")
  */
-class Session
+class JoinSession
 {
     /**
      * @ORM\Id
@@ -25,19 +25,22 @@ class Session
     /**
      * @ORM\Column(type="text")
      */
-    private $client;
+    private $serverId;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", mappedBy="session")
+     * @ORM\Column(type="string")
      */
-    private $user;
+    private $ip;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\JoinSession", inversedBy="session", cascade={"remove"})
-     * @ORM\JoinColumn(name="join_session_id", referencedColumnName="id", nullable=true)
+     * @ORM\Column(type="string")
      */
-    private $joinSession;
+    private $username;
 
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Session", mappedBy="joinSession")
+     */
+    private $session;
 
     /**
      * @return mixed
@@ -74,49 +77,65 @@ class Session
     /**
      * @return mixed
      */
-    public function getClient()
+    public function getSession()
     {
-        return $this->client;
+        return $this->session;
     }
 
     /**
-     * @param mixed $client
+     * @param mixed $session
      */
-    public function setClient($client)
+    public function setSession($session)
     {
-        $this->client = $client;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param mixed $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
+        $this->session = $session;
     }
 
     /**
      * @return mixed
      */
-    public function getJoinSession()
+    public function getServerId()
     {
-        return $this->joinSession;
+        return $this->serverId;
     }
 
     /**
-     * @param mixed $joinSession
+     * @param mixed $serverId
      */
-    public function setJoinSession($joinSession)
+    public function setServerId($serverId)
     {
-        $this->joinSession = $joinSession;
+        $this->serverId = $serverId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    /**
+     * @param mixed $ip
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
     }
 
 }
