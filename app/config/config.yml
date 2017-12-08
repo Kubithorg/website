@@ -94,6 +94,7 @@ easy_admin:
         menu:
             - { entity: 'User', icon: 'users' }
             - { entity: 'Product', icon: 'shopping-cart' }
+            - { entity: 'Goal', icon: 'trophy' }
 
     entities:
         User:

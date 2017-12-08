@@ -7,6 +7,7 @@ use AppBundle\Entity\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,7 +24,7 @@ class SessionServerController extends Controller
     /**
      * @Route("/join")
      * @Method("POST")
-     * @param Request $request
+     * @param Request $req
      * @return Response
      */
     public function joinAction(Request $req)
@@ -94,31 +95,34 @@ class SessionServerController extends Controller
      */
     public function hasJoinedAction(Request $request)
     {
-        //  $request = $this->parseRequest($request);
+
 
         $username = $request->get('username') ?? null;
         $serverId = $request->get('serverId') ?? null;
-        $ip = $request->get('ip') ?? null;
 
         $mojangResponse = file_get_contents('https://api.mojang.com/users/profiles/minecraft/' . $username . '?at=0');
         $mojangResponse = json_decode($mojangResponse);
 
         if (isset($mojangResponse->name)) {
-            $mojangResponse = file_get_contents('https://sessionserver.mojang.com/session/minecraft/hasJoined?username=$username&serverId=$serverId&ip=$ip');
+            $mojangResponse = file_get_contents("https://sessionserver.mojang.com/session/minecraft/hasJoined?username=$username&serverId=$serverId");
+
             return new Response($mojangResponse);
+
         } else {
             $em = $this->getDoctrine()->getManager();
 
             $joinSession = $em
                 ->getRepository(JoinSession::class)
                 ->findOneBy([
-                    'ip' => $ip,
+                    //         'ip' => $ip,
                     'username' => $username,
                     'serverId' => $serverId
                 ]);
 
             if (!$joinSession)
-                return $this->errorForbidenResponse();
+                return new Response();
+
+            $uuid = $joinSession->getSession()->getUser()->getUuid();
 
             $em = $this->getDoctrine()->getManager();
             $session = $em->getRepository(Session::class)->find($joinSession->getSession()->getId());
@@ -128,10 +132,16 @@ class SessionServerController extends Controller
             $em->remove($joinSession);
             $em->flush();
 
-            return new Response('', Response::HTTP_NO_CONTENT);
+            $uuid = $joinSession->getSession()->getUser()->getUuid();
+
+            return new JsonResponse([
+                'id' => $uuid,
+                'name' => $username,
+                'properties' => [$this->profile($username, $uuid)]
+
+            ]);
         }
 
     }
-
 
 }

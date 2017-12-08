@@ -2,8 +2,8 @@
 
 namespace Kubithon\ShopBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Class DefaultController
@@ -31,4 +31,5 @@ class DefaultController extends Controller
 
         return $this->render('shop/items.html.twig', ['items' => $items]);
     }
+
 }
