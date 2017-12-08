@@ -99,7 +99,7 @@ class SessionServerController extends Controller
 
         $username = $request->get('username') ?? null;
         $serverId = $request->get('serverId') ?? null;
-        $ip = $request->get('ip') ?? null;
+        // $ip = $request->get('ip') ?? null;
 
         $mojangResponse = file_get_contents('https://api.mojang.com/users/profiles/minecraft/' . $username . '?at=0');
         $mojangResponse = json_decode($mojangResponse);
@@ -113,7 +113,7 @@ class SessionServerController extends Controller
             $joinSession = $em
                 ->getRepository(JoinSession::class)
                 ->findOneBy([
-                    'ip' => $ip,
+                    //         'ip' => $ip,
                     'username' => $username,
                     'serverId' => $serverId
                 ]);
