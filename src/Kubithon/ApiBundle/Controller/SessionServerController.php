@@ -135,12 +135,12 @@ class SessionServerController extends Controller
             $mojangResponse = json_decode($mojangResponse);
 
             echo "Pseudo :"
-            dump($mojangResponse);
+            var_dump($mojangResponse);
 
             if (isset($mojangResponse->name)) {
                 $mojangResponse = file_get_contents("https://sessionserver.mojang.com/session/minecraft/hasJoined?username=$username&serverId=$serverId");
                 echo "Mojang : "
-               die(dump($mojangResponse));
+               die(var_dump($mojangResponse));
                 return new Response($mojangResponse);
 
             }
