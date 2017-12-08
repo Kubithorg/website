@@ -2,12 +2,24 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Config;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
+    private function config($entry_key, $default = null)
+    {
+        $cfg = $this
+            ->getDoctrine()
+            ->getRepository('AppBundle:Config')
+            ->findOneBy(['entry' => $entry_key]);
+
+        if ($cfg == null) return $default;
+        return $cfg->getValue();
+    }
+
     /**
      * @Route("/home", name="homepage")
      */
@@ -15,8 +27,8 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $current_gain = 300;
-        $max_gain = 2000;
+        $current_gain = $this->config(Config::$CURRENT_AMOUNT, 0);
+        $max_gain = $this->config(Config::$MAX_AMOUNT, 2000);
 
         $goals = $em->createQuery('
             SELECT

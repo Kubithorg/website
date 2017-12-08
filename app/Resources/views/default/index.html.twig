@@ -45,13 +45,26 @@
 
 {% block hero_foot %}
     <div class="columns">
-        <a class="column has-text-centered"><p>» Rejoignez l'événement sur Minecraft «</p></a>
+        <a class="column has-text-centered" href="#download"><p>» Rejoignez l'événement sur Minecraft «</p></a>
         <div class="is-divider-vertical" data-content="OU"></div>
         <a class="column has-text-centered" href="#live"><p>» Suivez l'événement en Live ! «</p></a>
     </div>
 {% endblock %}
 
 {%  block content %}
+    <section class="section download" id="download">
+        <h1>Rejoindre l'événement en jeu sur Minecraft</h1>
+        <p>Vivez le Kubithon de l'intérieur !</p>
+        <p>Il vous suffit de télécharger l'installeur ci-dessous et de double-cliquer sur le fichier téléchargé.<br />Fonctionne pour les versions premium ou non.</p>
+
+
+        <p style="margin-top: 2em; margin-bottom: 0;">
+            <a href="https://github.com/Kubithorg/launcher/releases/download/v1.1.0/Kubithon.jar" class="button-kubithon" target="_blank" style="font-size: 1em;">
+            Télécharger le lanceur
+            </a>
+        </p>
+    </section>
+
     <section class="section list-streams" id="live">
         <h1>Suivre l'événement en <em>live</em></h1>
         <p>Profitez des nombreux <em>streamers</em> qui rediffusent l'événement en direct !</p>

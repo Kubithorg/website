@@ -102,6 +102,7 @@ easy_admin:
             - { entity: 'Product', icon: 'shopping-cart' }
             - { entity: 'Goal', icon: 'trophy' }
             - { entity: 'Stream', icon: 'tv' }
+            - { entity: 'Config', icon: 'cog' }
 
     entities:
         User:
@@ -219,3 +220,27 @@ easy_admin:
                 title: 'Supprimer la diffusion'
                 fields:
                      - { property: 'id', label: 'ID', type_options: { disabled: true } }
+
+        Config:
+            label: 'Configuration'
+            class: AppBundle\Entity\Config
+            list:
+                title: 'Entrées de configuration'
+                fields:
+                    - 'id'
+                    - { property: 'description', label: 'Description' }
+                    - { property: 'value', label: 'Valeur' }
+
+            new:
+                title: 'Nouvelle entrée'
+                fields:
+                    - { property: 'entry', label: 'Clef de configuration (ne pas toucher !)' }
+                    - { property: 'description', label: 'Description' }
+                    - { property: 'value', label: 'Valeur', type_options: { required: false } }
+
+            edit:
+                title: 'Modifier une entrée'
+                fields:
+                    - { property: 'entry', label: 'Clef de configuration (ne pas toucher !)' }
+                    - { property: 'description', label: 'Description' }
+                    - { property: 'value', label: 'Valeur', type_options: { required: false } }
