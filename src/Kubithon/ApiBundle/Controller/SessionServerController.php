@@ -121,6 +121,8 @@ class SessionServerController extends Controller
             if (!$joinSession)
                 return new Response();
 
+            $uuid = $joinSession->getSession()->getUser()->getUuid();
+
             $em = $this->getDoctrine()->getManager();
             $session = $em->getRepository(Session::class)->find($joinSession->getSession()->getId());
             $session->setJoinSession(null);
@@ -134,7 +136,7 @@ class SessionServerController extends Controller
             return new JsonResponse([
                 'id' => $uuid,
                 'name' => $username,
-                'properties' => $this->profile($username, $uuid)
+                'properties' => [$this->profile($username, $uuid)]
 
             ]);
         }
