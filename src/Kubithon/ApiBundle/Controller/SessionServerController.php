@@ -95,6 +95,8 @@ class SessionServerController extends Controller
      */
     public function hasJoinedAction(Request $request)
     {
+
+        die(dump($request));
         //  $request = $this->parseRequest($request);
 
         $username = $request->get('username') ?? null;
@@ -105,7 +107,7 @@ class SessionServerController extends Controller
         $mojangResponse = json_decode($mojangResponse);
 
         if (isset($mojangResponse->name)) {
-            $mojangResponse = file_get_contents('https://sessionserver.mojang.com/session/minecraft/hasJoined?username=$username&serverId=$serverId&ip=$ip');
+            $mojangResponse = file_get_contents('https://sessionserver.mojang.com/session/minecraft/hasJoined?username=$username&serverId=$serverId');
             return new Response($mojangResponse);
         } else {
             $em = $this->getDoctrine()->getManager();
