@@ -14,3 +14,7 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    app.service.paypal.payment:
+        class: Kubithon\ShopBundle\Service\PaypalPaymentService
+        public: true
+

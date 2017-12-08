@@ -10,8 +10,10 @@
 
             {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register')}) }}
                 {{ form_widget(form) }}
-                <div class="text-right">
-                    <input type="submit" class="btn btn-primary" value="{{ 'registration.submit'|trans }}" />
+            <br>
+            <div class="pull-right">
+                <input type="submit" style="outline: none; border: none" class="button-kubithon"
+                       value="{{ 'registration.submit'|trans }}"/>
                 </div>
             {{ form_end(form) }}
 
