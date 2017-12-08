@@ -54,7 +54,7 @@ class AuthServerController extends Controller
         $password = $request->password ?? null;
         $clientToken = $request->clientToken ?? null;
 
-        if (!$user || !$password || !$clientToken)
+        if (!$user || !$password)
             return $this->errorBadRequestResponse();
 
         $user_manager = $this->get('fos_user.user_manager');
@@ -75,7 +75,7 @@ class AuthServerController extends Controller
             $em = $this->getDoctrine()->getManager();
             $session = $em->getRepository(Session::class)->find($user->getSession());
             $session->setAccess($this->genUuid());
-            $session->setClient($clientToken);
+           // $session->setClient($clientToken);
             $session->setUser($user);
             $em->flush();
 
@@ -83,7 +83,7 @@ class AuthServerController extends Controller
 
             $session = new Session();
             $session->setAccess($this->genUuid());
-            $session->setClient($clientToken);
+      //      $session->setClient($clientToken);
             $session->setUser($user);
 
             $em = $this->getDoctrine()->getManager();
@@ -97,7 +97,7 @@ class AuthServerController extends Controller
 
         $response = array(
             'accessToken' => $session->getAccess(),
-            'clientToken' => $session->getClient(),
+       //     'clientToken' => $session->getClient(),
             'selectedProfile' => [
                 'id' => $user->getUuid(),
                 'name' => $user->getUsername(),
@@ -121,24 +121,24 @@ class AuthServerController extends Controller
         $accessToken = $request->accessToken ?? null;
         $clientToken = $request->clientToken ?? null;
 
-        if (!$accessToken || !$clientToken)
+        if (!$accessToken)
             return $this->errorBadRequestResponse();
 
         $em = $this->getDoctrine()->getManager();
         $session = $em
             ->getRepository(Session::class)
-            ->findOneBy(['access' => $accessToken, 'client' => $clientToken]);
+            ->findOneBy(['access' => $accessToken]);
 
         if (!$session)
             return $this->errorInvalidCredentialsResponse();
 
         $session->setAccess($this->genUuid());
-        $session->setClient($clientToken);
+       // $session->setClient($clientToken);
         $em->flush();
 
         $response = array(
             'accessToken' => $session->getAccess(),
-            'clientToken' => $session->getClient(),
+       //     'clientToken' => $session->getClient(),
             'selectedProfile' => [
                 'id' => $session->getUser()->getUuid(),
                 'name' => $session->getUser()->getUsername(),
