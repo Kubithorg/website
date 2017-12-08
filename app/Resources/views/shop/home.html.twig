@@ -1,37 +1,29 @@
 {% extends "layout.html.twig" %}
 
-{% block content %}
-    <div class="row">
-
-        <div class="col-md-6 col-sm-12">
-            <div class="card text-white bg-success" id="shop" style="cursor: pointer">
-                <div class="card-body">
-                    <h4 class="card-title">Achat boutique</h4>
-                    <p class="card-text">Faites un don et reçevez des items et des avantages en jeu.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-sm-12">
-            <div class="card text-white bg-info" id="free" style="cursor: pointer">
-                <div class="card-body">
-                    <h4 class="card-title">Don libre</h4>
-                    <p class="card-text">faites un don simple sans aucune contrepartie en jeu.</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
+{% block hero_body %}
+    <h1 class="title">Dons & boutique</h1>
+    <h2 class="subtitle">Donnez au Téléthon, en échange d'avantages en jeu !</h2>
 {% endblock %}
 
-{% block javascripts %}
-    <script>
-        $('#shop').click(function() {
-            window.location.replace("{{ path('shop_items') }}");
-        });
-
-        $('#free').click(function() {
-
-        });
-    </script>
+{% block content %}
+    <div class="columns has-text-centered">
+        <div class="column is-6">
+            <a href="{{ path('shop_items') }}" class="button-kubithon">
+                Achat sur la boutique
+            </a>
+            <p class="button-kubithon-subtitle">
+                Faites un don et recevez des items et des avantages en jeu.<br />
+                Tous les revenus sont reversés au Téléthon, mais ces dons ne sont pas éligibles à une réduction d'impôts.
+            </p>
+        </div>
+        <div class="column is-6">
+            <a href="https://soutenir.afm-telethon.fr/kubithon" class="button-kubithon">
+                Don libre
+            </a>
+            <p class="button-kubithon-subtitle">
+                Faites un don simple sans aucune contrepartie en jeu.<br />
+                Ces dons sont déductibles à 66% des impôts !
+            </p>
+        </div>
+    </div>
 {% endblock %}

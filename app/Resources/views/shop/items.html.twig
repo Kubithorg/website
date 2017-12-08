@@ -1,28 +1,74 @@
 {% extends "layout.html.twig" %}
 
+{% block hero_body %}
+    <h1 class="title">Boutique de Kubithon</h1>
+    <h2 class="subtitle">Donnez au Téléthon, en échange d'avantages en jeu !</h2>
+{% endblock %}
+
 {% block content %}
-
     {% if app.user %}
-        <div class="col">
-            <div class="row align-items-center lead">
-                <div class="col-auto mr-auto">Bonjour <strong>{{ app.user.username }}</strong>, tu dispose de {{ app.user.balance }}€ sur ton compte</div>
-                <div class="col-auto"><a class="btn btn-sm btn-dark" href="">Créditer mon compte</a></div>
+        <article class="message is-primary is-medium">
+            <div class="message-header">
+                <p>Bonjour {{ app.user.username }} !</p>
             </div>
-        </div>
+            <div class="message-body">
+                <div class="columns is-centered">
+                    <div class="column is-10">
+                        Vous disposez de <strong>{{ app.user.balance }} €</strong> sur votre compte.
+                    </div>
+                    <div class="column is-2 has-test-right">
+                        <a class="button is-primary" href="">Créditer mon compte</a>
+                    </div>
+                </div>
+            </div>
+        </article>
     {% else %}
-        <div class="col">
-            <div class="row align-items-center lead">
-                <div class="col-auto mr-auto">Bienvenue dans la boutique, pour acheter connecte toi.</div>
-                <div class="col-auto"><a class="btn btn-sm btn-dark" href="{{ path('fos_user_security_login') }}">Connexion</a></div>
+        <article class="message is-primary is-medium">
+            <div class="message-header">
+                <p>Bienvenue sur la boutique !</p>
             </div>
-        </div>
+            <div class="message-body">
+                <div class="columns is-centered">
+                    <div class="column is-10">
+                        Vous devez être identifié pour acheter sur la boutique. Accordez trente secondes !<br />
+                        Commencez en cliquant sur le bouton à doite…
+                    </div>
+                    <div class="column is-2">
+                        <a class="button is-primary is-medium" href="{{ path('fos_user_security_login') }}">Connexion</a>
+                    </div>
+                </div>
+            </div>
+        </article>
     {% endif %}
-    <hr>
-    <div class="row">
 
-        {% for row in items|batch(4) %}
-            <div class="card-deck">
-                {% for item in row %}
+    <div class="columns is-multiline">
+
+        {% for item in items %}
+            <div class="column is-3">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img src="/uploads/images/products/{{ item.image }}" alt="{{ item.name }} (illustration)">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4">{{ item.name }}</p>
+                                <p class="subtitle is-6">{{ item.price }} €</p>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            {{ item.description|raw }}
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="#" class="card-footer-item is-unselectable has-text-centered{% if not app.user %} is-disabled{% endif %}">Acheter</a>
+                    </footer>
+                </div>
+
+                {#
                 <div class="card">
                     <img class="card-img-top" src="/uploads/images/products/{{ item.image }}" height="140" alt="Card image cap">
                     <div class="card-body">
@@ -38,13 +84,24 @@
                         </small>
                     </div>
                 </div>
-                {% endfor %}
-            </div><br>
+                #}
+            </div>
         {% endfor %}
     </div>
+
+    <footer class="footer has-text-centered">
+        <p>
+            L'intégralité des recettes de la boutique sont reversées au Téléthon.
+        </p>
+        <p>
+            Les dons via la boutique n'offrent pas de réduction d'impôts, mais vous pouvez
+            également <a href="https://soutenir.afm-telethon.fr/kubithon">faire un don sans contrepartie</a> qui permet d'en obtenir, à hauteur de 66%.
+        </p>
+    </footer>
 {% endblock %}
 
 {% block stylesheets %}
+    {{ parent() }}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.1/sweetalert2.css" />
 {% endblock %}
 

@@ -2,7 +2,22 @@ header.navbar {
 	border-bottom: solid 5px lighten($dark, 10%);
 
 	h1 {
-		font-family: 'CaracteresL1', 'Raleway', sans-serif;
+		font-family: 'CaracteresL1', 'Raleway-ExtraLight', $family-sans-serif;
 		font-size: 1.3em;
 	}
+}
+
+.hero {
+    font-family: 'Raleway-ExtraLight', $family-sans-serif;
+    .hero-body {
+        text-align: center;
+
+        h1.title {
+            font-size: 4em;
+        }
+    }
+}
+
+.main-container {
+    font-size: 1.2em;
 }
