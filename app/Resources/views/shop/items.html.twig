@@ -45,7 +45,7 @@
 
         {% for item in items %}
             <div class="column is-3">
-                <div class="card">
+                <div class="card kubithon-product">
                     <div class="card-image">
                         <figure class="image is-4by3">
                             <img src="/uploads/images/products/{{ item.image }}" alt="{{ item.name }} (illustration)">
@@ -64,27 +64,21 @@
                         </div>
                     </div>
                     <footer class="card-footer">
-                        <a href="#" class="card-footer-item is-unselectable has-text-centered{% if not app.user %} is-disabled{% endif %}">Acheter</a>
+                        <a href="#" title="text" class="kubithon-product-buy card-footer-item is-unselectable has-text-centered{% if not app.user %} is-disabled{% endif %}">Acheter</a>
                     </footer>
                 </div>
-
-                {#
-                <div class="card">
-                    <img class="card-img-top" src="/uploads/images/products/{{ item.image }}" height="140" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title">{{ item.name }}</h4>
-                        <p class="card-text">{{ item.description|raw }}</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">
-                            <div class="row align-items-center">
-                                <div class="col-auto mr-auto"><strong>3€</strong></div>
-                                <div class="col-auto"><a class="btn btn-sm btn-dark payment {% if not app.user %}disabled{% endif %}" href="" data-name="{{ item.name }}" data-price="{{ item.price }}€" data-id="{{ item.id }}">Acheter</a></div>
-                            </div>
-                        </small>
+                <div class="confirm-popup">
+                    <h4>Confirmez votre achat</h4>
+                    <p>Les achats au profit du Téléthon ne sont pas remboursables.</p>
+                    <div class="columns">
+                        <div class="column is-6">
+                            <a href="#" class="button is-outlined is-fullwidth confirm-popup-cancel">Annuler</a>
+                        </div>
+                        <div class="column is-6">
+                            <a href="#" class="button is-primary is-fullwidth">Confirmer</a>
+                        </div>
                     </div>
                 </div>
-                #}
             </div>
         {% endfor %}
     </div>
@@ -100,37 +94,43 @@
     </footer>
 {% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.1/sweetalert2.css" />
-{% endblock %}
-
 {% block javascripts %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.1/sweetalert2.all.min.js"></script>
+    {{ parent() }}
+
     {% if app.user %}
-    <script>
-        $('.payment').click(function (event) {
-            event.preventDefault();
-            swal({
-                title: 'Confirmez votre achat',
-                text: 'Si vous validez cet achat il n\'y a pas de retour arrière possible.',
-                type: 'question',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'Payer '+$(this).data('price'),
-            }).then(function () {
-                swal({
-                    title: 'C\'est parti !',
-                    text: 'Nous livrons actuellement votre item en jeu. Merci de patienter ...',
-                    timer: 5000,
-                    onOpen: function () {
-                        swal.showLoading()
+        <script type="text/javascript" src="{{ asset('bundles/app/js/tippy.all.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/app/js/utils.js') }}"></script>
+
+        <script type="text/javascript">
+            (function()
+            {
+                'use strict';
+
+                tippy('.kubithon-product-buy', {
+                    html: function(el) { return el.parentNode.parentNode.parentNode.querySelector('.confirm-popup') },
+                    placement: 'bottom',
+                    trigger: 'click',
+                    interactive: true,
+                    arrow: true,
+                    animation: 'fade',
+                    distance: 15,
+                    arrowTransform: 'scale(2)',
+                    wait: function(show, e)
+                    {
+                        e.preventDefault();
+                        show();
+                    },
+                    onShow: function()
+                    {
+                        var self = this;
+                        this.querySelector('.confirm-popup-cancel').addEventListener('click', function(e)
+                        {
+                            e.preventDefault();
+                            self._reference._tippy.hide(300);
+                        });
                     }
-                }).then(
-                    function () {},
-                    function () {}
-                )
-            })
-        });
-    </script>
+                });
+            })();
+        </script>
     {%  endif %}
 {% endblock %}
