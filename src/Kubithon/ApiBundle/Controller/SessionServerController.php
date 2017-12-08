@@ -119,7 +119,7 @@ class SessionServerController extends Controller
                 ]);
 
             if (!$joinSession)
-                return $this->errorForbidenResponse();
+                return new Response();
 
             $em = $this->getDoctrine()->getManager();
             $session = $em->getRepository(Session::class)->find($joinSession->getSession()->getId());
