@@ -48,10 +48,8 @@ trait MinecraftResponseAwareTrait
         ]));
 
         return [
-            'properties' => [
-                'name' => 'textures',
-                'value' => $payload
-            ]
+            'name' => 'textures',
+            'value' => $payload
         ];
 
     }

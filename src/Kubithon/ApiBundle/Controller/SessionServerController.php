@@ -7,6 +7,7 @@ use AppBundle\Entity\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -128,7 +129,14 @@ class SessionServerController extends Controller
             $em->remove($joinSession);
             $em->flush();
 
-            return new Response('', Response::HTTP_NO_CONTENT);
+            $uuid = $joinSession->getSession()->getUser()->getUuid();
+
+            return new JsonResponse([
+                'id' => $uuid,
+                'username' => $username,
+                'properties' => $this->profile($username, $uuid)
+
+            ]);
         }
 
     }
