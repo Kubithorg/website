@@ -6,8 +6,12 @@
             font-size: 1.4em;
         }
         p {
-            font-size: 1.1em;
+            font-size: 1em;
             margin-bottom: .8em;
         }
     }
+}
+
+.message-header p {
+    margin: .05em .4em;
 }
