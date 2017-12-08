@@ -9,7 +9,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateGainsCommand extends ContainerAwareCommand
 {
-    const TELETHON_URL = 'https://soutenir.afm-telethon.fr/les-youtubeuses-se-bougent-pour-le-telethon';
+    //const TELETHON_URL = 'https://soutenir.afm-telethon.fr/les-youtubeuses-se-bougent-pour-le-telethon';
+    const TELETHON_URL = 'https://soutenir.afm-telethon.fr/kubithon';
 
     protected function configure()
     {
