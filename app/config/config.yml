@@ -154,14 +154,12 @@ easy_admin:
                 fields:
                     - 'id'
                     - { property: 'amount', label: 'Montant minimal' }
-                    - { property: 'title', label: 'Titre' }
                     - { property: 'description', label: 'Description' }
-                    - { property: 'achieved', label: 'Atteint', type: 'toggle' }
+                    - { property: 'achieved', label: 'Atteint', type: 'toggle', type_options: { disabled: true } }
 
             new:
                 title: 'Nouvel objectif (sera affiché en direct)'
                 fields:
-                    - { property: 'title', label: 'Titre' }
                     - { property: 'amount', label: 'Montant minimal' }
                     - { property: 'description', label: 'Description' }
                     - { property: 'achievedMessage', label: "Message affiché lorsqu'atteint" }
@@ -170,7 +168,6 @@ easy_admin:
             edit:
                 title: 'Modifier un objectif (sera mis à jour en direct)'
                 fields:
-                    - { property: 'title', label: 'Titre' }
                     - { property: 'amount', label: 'Montant minimal' }
                     - { property: 'description', label: 'Description' }
                     - { property: 'achievedMessage', label: "Message affiché lorsqu'atteint" }

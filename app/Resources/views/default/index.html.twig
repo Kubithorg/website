@@ -10,78 +10,36 @@
 
 {% block hero_body %}
     <div class="container has-text-centered main-title donation">
-        <p class="donation-amount">Grâce à vous, nous avons déjà récolté <span>184 221 €</span></p>
+        <p class="donation-amount">Grâce à vous, nous avons déjà récolté <span>{{ current_gain|number_format }} €</span></p>
         <div class="goals">
-            <progress class="progress is-success" value="6" max="100">184 221 €</progress>
+            <progress class="progress is-success" value="{{ current_gain }}" max="{{ max_gain }}">
+                {{ current_gain|number_format }} €
+            </progress>
             <ul class="progress-goals">
-                <li style="margin-left: 8%;">
-                    <span aria-hidden="true"></span>
-                    <aside>
-                        <div>
-                            <h4>185 000 € <span class="fa fa-rocket"></span></h4>
-                            <p>On envoie du thon en cube à un donnateur au hasard</p>
-                        </div>
-                    </aside>
-                </li>
-                <li style="margin-left: 21%;">
-                    <span aria-hidden="true"></span>
-                    <aside>
-                        <div>
-                            <h4>185 000 € <span class="fa fa-rocket"></span></h4>
-                            <p>On envoie du thon en cube à un donnateur au hasard</p>
-                        </div>
-                    </aside>
-                </li>
-                <li style="margin-left: 34%;">
-                    <span aria-hidden="true"></span>
-                    <aside>
-                        <div>
-                            <h4>190 000 € <span class="fa fa-rocket"></span></h4>
-                            <p>Toute l'équipe chante <em>On va s'aimer</em> de Gilbert Montagnier !</p>
-                        </div>
-                    </aside>
-                </li>
-                <li style="margin-left: 52%;">
-                    <span aria-hidden="true"></span>
-                    <aside>
-                        <div>
-                            <h4>190 000 € <span class="fa fa-rocket"></span></h4>
-                            <p>Toute l'équipe chante <em>On va s'aimer</em> de Gilbert Montagnier !</p>
-                        </div>
-                    </aside>
-                </li>
-                <li style="margin-left: 65%;">
-                    <span aria-hidden="true"></span>
-                    <aside>
-                        <div>
-                            <h4>195 000 € <span class="fa fa-rocket"></span></h4>
-                            <p>???</p>
-                        </div>
-                    </aside>
-                </li>
-                <li style="margin-left: 82%;" class="right-tick">
-                    <span aria-hidden="true"></span>
-                    <aside>
-                        <div>
-                            <h4>195 000 € <span class="fa fa-rocket"></span></h4>
-                            <p>???</p>
-                        </div>
-                    </aside>
-                </li>
-                <li style="margin-left: 100%;" class="right-tick">
-                    <span aria-hidden="true"></span>
-                    <aside>
-                        <div>
-                            <h4>200 000 € <span class="fa fa-rocket"></span></h4>
-                            <p>UN GROS TRUC</p>
-                        </div>
-                    </aside>
-                </li>
+                {% for goal in goals %}
+                    <li
+                        style="margin-left: {{ goal.percentage * 100 }}%"
+                        {% if goal.percentage > 0.5 %}class="right-tick"{% endif %}>
+                        <span aria-hidden="true"></span>
+                        <aside>
+                            <div>
+                                <h4>{{ goal.amount|number_format }} €</h4>
+                                <p>
+                                    {{ goal.description }}
+                                </p>
+                            </div>
+                        </aside>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
-        <button class="button is-primary is-large is-outlined">
-            Donner pour le Téléthon
-        </button>
+        <a href="https://soutenir.afm-telethon.fr/kubithon" class="button-kubithon" target="_blank">
+            Donner au Téléthon
+        </a>
+        <p class="button-kubithon-subtitle">
+            Sur le site web de l'AFM-Téléthon<br />
+            Ces dons sont déductibles à 66% des impôts !
+        </p>
     </div>
 {% endblock %}
 
