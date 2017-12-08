@@ -25,7 +25,7 @@
                             <div>
                                 <h4>{{ goal.amount|number_format }} €</h4>
                                 <p>
-                                    {{ goal.description }}
+                                    {{ goal.description|raw }}
                                 </p>
                             </div>
                         </aside>
