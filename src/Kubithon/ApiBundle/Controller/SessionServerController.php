@@ -128,8 +128,8 @@ class SessionServerController extends Controller
             $session->setJoinSession(null);
             $em->flush();
 
-            $em->remove($joinSession);
-            $em->flush();
+         //   $em->remove($joinSession);
+         //   $em->flush();
 
             $uuid = $joinSession->getSession()->getUser()->getUuid();
 
