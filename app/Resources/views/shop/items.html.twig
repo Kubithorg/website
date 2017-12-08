@@ -17,7 +17,7 @@
                         Vous disposez de <strong>{{ app.user.balance }} €</strong> sur votre compte.
                     </div>
                     <div class="column is-2 has-test-right">
-                        <a class="button is-primary" href="">Créditer mon compte</a>
+                        <a class="button is-primary" href="{{ path('shop_credit') }}">Créditer mon compte</a>
                     </div>
                 </div>
             </div>
@@ -40,6 +40,10 @@
             </div>
         </article>
     {% endif %}
+
+    <p>
+        L'intégralité des recettes de la boutique sont <strong>reversées au Téléthon</strong>.
+    </p>
 
     <div class="columns is-multiline">
 
@@ -84,9 +88,6 @@
     </div>
 
     <footer class="footer has-text-centered">
-        <p>
-            L'intégralité des recettes de la boutique sont reversées au Téléthon.
-        </p>
         <p>
             Les dons via la boutique n'offrent pas de réduction d'impôts, mais vous pouvez
             également <a href="https://soutenir.afm-telethon.fr/kubithon">faire un don sans contrepartie</a> qui permet d'en obtenir, à hauteur de 66%.

@@ -32,4 +32,11 @@ class DefaultController extends Controller
         return $this->render('shop/items.html.twig', ['items' => $items]);
     }
 
+    /**
+     * @Route("/credit", name="shop_credit")
+     */
+    public function creditAction()
+    {
+        return $this->render('shop/credits.html.twig');
+    }
 }
