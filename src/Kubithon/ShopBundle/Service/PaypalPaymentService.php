@@ -101,7 +101,7 @@ class PaypalPaymentService
 
         return (new Transaction())
             ->setItemList($list)
-            ->setDescription('Octal System')
+            ->setDescription('Kubithon')
             ->setAmount($amount);
 
     }
