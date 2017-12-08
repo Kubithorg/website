@@ -4,3 +4,6 @@
 [submodule "src/AppBundle/Resources/sass/bulma-divider"]
 	path = src/AppBundle/Resources/sass/bulma-divider
 	url = https://github.com/Wikiki/bulma-divider
+[submodule "src/AppBundle/Resources/sass/bulma-ribbon"]
+	path = src/AppBundle/Resources/sass/bulma-ribbon
+	url = https://github.com/Wikiki/bulma-ribbon.git

@@ -45,12 +45,113 @@
 
 {% block hero_foot %}
     <div class="columns">
-        <a class="column has-text-centered"><p>Rejoignez l'événement sur Minecraft</p></a>
+        <a class="column has-text-centered"><p>» Rejoignez l'événement sur Minecraft «</p></a>
         <div class="is-divider-vertical" data-content="OU"></div>
-        <a class="column has-text-centered"><p>Suivez l'événement en Live !</p></a>
+        <a class="column has-text-centered" href="#live"><p>» Suivez l'événement en Live ! «</p></a>
     </div>
 {% endblock %}
 
 {%  block content %}
-    <h1>Pomf</h1>
+    <section class="section list-streams" id="live">
+        <h1>Suivre l'événement en <em>live</em></h1>
+        <p>Profitez des nombreux <em>streamers</em> qui rediffusent l'événement en direct !</p>
+
+        {# TODO 2018 : code dupliqué #}
+
+        {%  if main_stream %}
+            <div class="card has-ribbon">
+                <div class="ribbon is-danger is-large">
+                    <span class="fa fa-circle"></span>&nbsp;&nbsp;LIVE
+                </div>
+                {%  if main_stream.bannerName %}
+                <div class="card-image" aria-hidden="true">
+                    <a href="{{ main_stream.url }}">
+                        <figure class="image">
+                            <img src="/uploads/images/streams/{{ main_stream.bannerName }}" alt="Bannière" />
+                        </figure>
+                    </a>
+                </div>
+                {% endif %}
+                <div class="card-content">
+                    <div class="media">
+                        {% if main_stream.authorLogoName %}
+                        <div class="media-left" aria-hidden="true">
+                            <figure class="image is-48x48">
+                                <img src="/uploads/images/streams_authors/{{ main_stream.authorLogoName }}" alt="{{ main_stream.author }}" />
+                            </figure>
+                        </div>
+                        {% endif %}
+                        <div class="media-content columns">
+                            <div class="column is-7">
+                                <p class="title is-3">{{ main_stream.title }}</p>
+                                <p class="subtitle is-5">{{ main_stream.subtitle }}</p>
+                            </div>
+                            <div class="column is-5 has-text-right">
+                                <a href="{{ main_stream.url }}" class="button is-primary is-large">
+                                    Voir la diffusion
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="columns is-multiline">
+            {% for stream in streams %}
+                <div class="column is-6">
+                    <div class="card has-ribbon">
+                        <div class="ribbon is-danger is-large">
+                            <span class="fa fa-circle"></span>&nbsp;&nbsp;LIVE
+                        </div>
+                        {%  if stream.bannerName %}
+                            <div class="card-image" aria-hidden="true">
+                                <a href="{{ stream.url }}">
+                                    <figure class="image is-4by3">
+                                        <img src="/uploads/images/streams/{{ stream.bannerName }}" alt="Bannière" />
+                                    </figure>
+                                </a>
+                            </div>
+                        {% endif %}
+                        <div class="card-content">
+                            <div class="media">
+                                {% if stream.authorLogoName %}
+                                    <div class="media-left" aria-hidden="true">
+                                        <figure class="image is-48x48">
+                                            <img src="/uploads/images/streams_authors/{{ stream.authorLogoName }}" alt="{{ stream.title }}" />
+                                        </figure>
+                                    </div>
+                                {% endif %}
+                                <div class="media-content columns">
+                                    <div class="column is-7">
+                                        <p class="title is-3">{{ stream.title }}</p>
+                                        <p class="subtitle is-5">{{ stream.subtitle }}</p>
+                                    </div>
+                                    <div class="column is-5 has-text-right">
+                                        <a href="{{ stream.url }}" class="button is-primary is-large">
+                                            Voir la diffusion
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+
+<section class="section discord" id="discord">
+    <h1>Conférences et interaction sur Discord</h1>
+    <p>Suivez des conférences et discutez directement sur <strong>Discord</strong>.<br />Cliquez ci-dessous !</p>
+
+    <p class="has-text-centered">
+        <a href="https://discord.gg/ZwW9Hru">
+            <img src="{{ asset('bundles/app/images/discord-logo.svg') }}" alt="Rejoindre Discord" style="height: 8em;" />
+        </a>
+    </p>
+
+    <p><em>Le planning des conférences sera prochainement affiché ici. Elles commencent le samedi.</em></p>
+</section>
 {% endblock %}

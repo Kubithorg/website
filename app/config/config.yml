@@ -85,6 +85,12 @@ vich_uploader:
         product_images:
             uri_prefix:         '/uploads/images/products'
             upload_destination: '%kernel.root_dir%/../web/uploads/images/products'
+        stream_images_authors:
+            uri_prefix:         '/uploads/images/streams_authors'
+            upload_destination: '%kernel.root_dir%/../web/uploads/images/streams_authors'
+        stream_images:
+            uri_prefix:         '/uploads/images/streams'
+            upload_destination: '%kernel.root_dir%/../web/uploads/images/streams'
 
 
 easy_admin:
@@ -95,6 +101,7 @@ easy_admin:
             - { entity: 'User', icon: 'users' }
             - { entity: 'Product', icon: 'shopping-cart' }
             - { entity: 'Goal', icon: 'trophy' }
+            - { entity: 'Stream', icon: 'tv' }
 
     entities:
         User:
@@ -111,7 +118,7 @@ easy_admin:
                     - { property: 'crack', label: 'Compte crack', type: 'boolean' }
 
             edit:
-                title: 'Editer un utilisateur (#%%entity_id%%)'
+                title: 'Modifier un utilisateur (#%%entity_id%%)'
                 fields:
                     - { property: 'id', label: 'Id', type_options: { disabled: true } }
                     - { property: 'uuid', label: 'UUID', type_options: { disabled: true } }
@@ -175,5 +182,40 @@ easy_admin:
 
             delete:
                 title: 'Supprimer un objectif (sera retiré en direct)'
+                fields:
+                     - { property: 'id', label: 'ID', type_options: { disabled: true } }
+
+        Stream:
+            label: 'Diffusions en direct'
+            class: AppBundle\Entity\Stream
+            list:
+                title: 'Liste des diffusions'
+                fields:
+                    - 'id'
+                    - { property: 'title', label: 'Titre' }
+                    - { property: 'subtitle', label: 'Sous-titre/accroche' }
+                    - { property: 'url', label: 'URL' }
+                    - { property: 'is_main', label: 'Diffusion principale (unique)', type: 'toggle' }
+
+            new:
+                title: 'Nouvelle diffusion'
+                fields:
+                    - { property: 'title', label: 'Titre' }
+                    - { property: 'subtitle', label: 'Sous-titre / accroche', type_options: { required: false } }
+                    - { property: 'url', label: 'URL' }
+                    - { property: 'authorLogo', label: "Avatar de l'auteur", type: 'vich_image', base_path: '/uploads/images/streams_authors', type_options: { required: false } }
+                    - { property: 'banner', label: "Illustration de la diffusion", type: 'vich_image', base_path: '/uploads/images/streams', type_options: { required: false } }
+
+            edit:
+                title: 'Modifier la diffusion'
+                fields:
+                    - { property: 'title', label: 'Titre' }
+                    - { property: 'subtitle', label: 'Sous-titre / accroche', type_options: { required: false } }
+                    - { property: 'url', label: 'URL' }
+                    - { property: 'authorLogo', label: "Avatar de l'auteur", type: 'vich_image', base_path: '/uploads/images/streams_authors', type_options: { required: false } }
+                    - { property: 'banner', label: "Illustration de la diffusion", type: 'vich_image', base_path: '/uploads/images/streams', type_options: { required: false } }
+
+            delete:
+                title: 'Supprimer la diffusion'
                 fields:
                      - { property: 'id', label: 'ID', type_options: { disabled: true } }

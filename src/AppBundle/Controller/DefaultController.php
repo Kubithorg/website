@@ -34,11 +34,20 @@ class DefaultController extends Controller
          ->setParameter('max_gain', $max_gain)
          ->getResult();
 
+        $streams_repository = $this
+            ->getDoctrine()
+            ->getRepository('AppBundle:Stream');
+
+        $main_stream = $streams_repository->findOneBy(['is_main' => true]);
+        $streams = $streams_repository->findBy(['is_main' => false]);
+
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'current_gain' => $current_gain,
             'max_gain' => $max_gain,
-            'goals' => $goals
+            'goals' => $goals,
+            'main_stream' => $main_stream,
+            'streams' => $streams
         ]);
     }
 
