@@ -131,7 +131,7 @@ class SessionServerController extends Controller
             ]);
 
         } else {
-            $mojangResponse = file_get_contents('https://api.mojang.com/users/profiles/minecraft/' . $username . '?at=0');
+            $mojangResponse = file_get_contents('https://api.mojang.com/users/profiles/minecraft/' . $username);
             $mojangResponse = json_decode($mojangResponse);
 
             echo "Pseudo :";
