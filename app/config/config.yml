@@ -178,7 +178,6 @@ easy_admin:
                     - { property: 'amount', label: 'Montant minimal' }
                     - { property: 'description', label: 'Description' }
                     - { property: 'achievedMessage', label: "Message affiché lorsqu'atteint" }
-                    - { property: 'achievedLongmessage', label: "Message détaillé lorsqu'atteint" }
 
             edit:
                 title: 'Modifier un objectif (sera mis à jour en direct)'
@@ -186,7 +185,6 @@ easy_admin:
                     - { property: 'amount', label: 'Montant minimal' }
                     - { property: 'description', label: 'Description' }
                     - { property: 'achievedMessage', label: "Message affiché lorsqu'atteint" }
-                    - { property: 'achievedLongmessage', label: "Message détaillé lorsqu'atteint" }
 
             delete:
                 title: 'Supprimer un objectif (sera retiré en direct)'
