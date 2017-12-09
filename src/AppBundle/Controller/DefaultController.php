@@ -46,6 +46,22 @@ class DefaultController extends Controller
          ->setParameter('max_gain', $max_gain)
          ->getResult();
 
+        $previous_goal = $em->createQuery('
+            SELECT
+                g.description,
+                g.amount,
+                g.achievedMessage,
+                ((g.amount + 0.0) / (:max_gain + 0.0)) AS percentage
+            FROM
+                AppBundle:Goal g
+            WHERE
+                g.amount < :current_gain
+            ORDER BY g.amount DESC
+        ')->setParameter('current_gain', $current_gain)
+          ->setParameter('max_gain', $max_gain)
+          ->setMaxResults(1)
+          ->getOneOrNullResult();
+
         $streams_repository = $this
             ->getDoctrine()
             ->getRepository('AppBundle:Stream');
@@ -54,12 +70,13 @@ class DefaultController extends Controller
         $streams = $streams_repository->findBy(['is_main' => false, 'is_enabled' => true]);
 
         return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-            'current_gain' => $current_gain,
-            'max_gain' => $max_gain,
-            'goals' => $goals,
-            'main_stream' => $main_stream,
-            'streams' => $streams
+            'base_dir'      => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+            'current_gain'  => $current_gain,
+            'max_gain'      => $max_gain,
+            'goals'         => $goals,
+            'previous_goal' => $previous_goal,
+            'main_stream'   => $main_stream,
+            'streams'       => $streams
         ]);
     }
 }
