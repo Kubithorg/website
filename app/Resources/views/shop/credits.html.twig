@@ -9,11 +9,20 @@
     {% if app.user %}
         <article class="message is-primary is-medium">
             <div class="message-header">
-                <p>Bonjour {{ app.user.username }} !</p>
+                Bonjour {{ app.user.username }} !
             </div>
-            <div class="message-body is-centered">
-                Vous disposez de <strong>{{ app.user.balance }} €</strong> sur votre compte.
+
+            <div class="message-body">
+                <div class="columns is-centered">
+                    <div class="column is-10">
+                        Vous disposez de <strong>{{ app.user.balance }} €</strong> sur votre compte.
+                    </div>
+                    <div class="column is-2 has-test-right">
+                        <a class="button is-warning" href="/logout">Déconnexion</a>
+                    </div>
+                </div>
             </div>
+
         </article>
 
         <p>
@@ -59,9 +68,9 @@
                 <div class="box">
                     <div class="has-text-centered">
 
-                        <button id="fr" class="button is-primary is-active is-large">France</button>
-                        <button id="dom" class="button is-primary is-large">France DOM</button>
-                        <button id="bel" class="button is-primary is-large">Belgique</button>
+                        <button id="fr" class="button is-primary is-active">France</button>
+                        <button id="dom" class="button is-primary">France DOM</button>
+                        <button id="bel" class="button is-primary">Belgique</button>
                         <br><br>
 
                         Chaque code validé créditera votre compte de 1,50&euro;
@@ -79,7 +88,7 @@
                                     </div>
                                 </div>
                                 <input type="hidden" name="palier" id="palier" value="A300_1FR">
-                                <button id="bel" class="button is-primary">Valider</button>
+                                <button id="bel" class="button is-warning">Valider</button>
                                 <br><br>
                             </div>
                         </form>

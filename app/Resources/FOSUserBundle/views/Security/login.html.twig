@@ -3,11 +3,11 @@
 
 {% block content %}
 
-            {% if error %}
-                <div class="notification is-danger">
-                    <strong>Erreur !</strong> {{ error.messageKey|trans(error.messageData, 'security') }}
-                </div>
-            {% endif %}
+    {% if error %}
+        <div class="notification is-danger">
+            <strong>Erreur !</strong> {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
 
     <div class="columns">
         <div class="column is-offset-one-fifth is-3">
