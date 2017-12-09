@@ -16,30 +16,45 @@
                     <div class="column is-10">
                         Vous disposez de <strong>{{ app.user.balance }} €</strong> sur votre compte.
                     </div>
-                    <div class="column is-2 has-test-right">
-                        <a class="button is-primary" href="">Créditer mon compte</a>
-                    </div>
                 </div>
             </div>
         </article>
 
         <p>
-            Pour acheter sur la boutique, vous devez au préalable recharger votre compte avec de l'argent. Pour ce faire, <strong>cliquez sur le bouton ci-dessous</strong>.
+            Pour acheter sur la boutique, vous devez au préalable recharger votre compte avec de l'argent. <br>Pour ce
+            faire, <strong>choisissez votre moyen de payment</strong>.
         </p>
 
-        <p class="had-text-centered">
-            <!-- TODO Bouton paypal -->
-        </p>
+        <br><br>
+        <div class="columns is-centered">
+            <div class="column is-4">
+                <a href="" class="button-kubithon" id="paypal">
+                    Paypal
+                </a>
+            </div>
+            <div class="column is-4">
+                <a href="" class="button-kubithon" id="mcg">
+                    Téléphone/SMS
+                </a>
+            </div>
+        </div>
 
-        <footer class="footer has-text-centered">
-        <p>
-            L'intégralité des recettes de la boutique sont reversées au Téléthon.
-        </p>
-        <p>
-            Les dons via la boutique n'offrent pas de réduction d'impôts, mais vous pouvez
-            également <a href="https://soutenir.afm-telethon.fr/kubithon">faire un don sans contrepartie</a> qui permet d'en obtenir, à hauteur de 66%.
-        </p>
-    </footer>
+        <div class="modal" id="paypal_modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <div class="has-text-centered">
+                        <strong>Payer avec paypal</strong><br><br>
+                        <a class="button is-primary" href="{{ path('payment_generate', {price: 5}) }}">5&euro;</a>
+                        <a class="button is-primary" href="{{ path('payment_generate', {price: 10}) }}">10&euro;</a>
+                        <a class="button is-primary" href="{{ path('payment_generate', {price: 15}) }}">15&euro;</a>
+                        <a class="button is-primary" href="{{ path('payment_generate', {price: 20}) }}">20&euro;</a>
+                    </div>
+
+                </div>
+            </div>
+            <button class="modal-close is-large" id="paypal_modal_close"></button>
+        </div>
 
     {% else %}
         <article class="message is-primary is-medium">
@@ -58,5 +73,31 @@
                 </div>
             </div>
         </article>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {% if app.user %}
+        <script>
+            $('#paypal').click(function (e) {
+                e.preventDefault();
+                $('#paypal_modal').addClass('is-active');
+            });
+
+            $('#paypal_modal_close').click(function (e) {
+                $('#paypal_modal').removeClass('is-active');
+            });
+
+            $('#success_modal_close').click(function (e) {
+                $('#success_modal').removeClass('is-active');
+            });
+
+            $(document).on('keyup', function (evt) {
+                if (evt.keyCode == 27) {
+                    $('#paypal_modal').removeClass('is-active');
+                }
+            });
+
+        </script>
     {% endif %}
 {% endblock %}

@@ -39,3 +39,8 @@ monolog:
 
 #swiftmailer:
 #    delivery_addresses: ['me@example.com']
+
+parameters:
+    paypal_id: 'AT5YTjT0h6XSIIW2n6DSHU924Vqmp0-ZwswgH8bC8Vv9F9wK9q3mT26IyUhXzKtOA3oFucdoUIb3L-5y'
+    paypal_secret: 'EOTMS2litI6S25EEeD_FMBVmWBOcldaWILtCjlWcRrh2e4yCZxHZmMJ_FUBdJqToeBW1zl9zz2X117dU'
+    paypal_sandbox: true

@@ -21,3 +21,5 @@
 
 *.sqlite
 .sass-cache
+/app/config/config_prod.yml
+/app/config/config_dev.yml

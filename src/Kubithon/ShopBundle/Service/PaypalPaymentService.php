@@ -69,27 +69,27 @@ class PaypalPaymentService
         $payment->setIntent('sale');
 
         $redirectUrls = (new RedirectUrls())
-            ->setReturnUrl($this->router->generate('payment_execute', ['id' => $invoice->getId()], Router::ABSOLUTE_URL))
-            ->setCancelUrl($this->router->generate('homepage', [], Router::ABSOLUTE_URL));
+            ->setReturnUrl($this->router->generate('payment_execute', ['price' => $price], Router::ABSOLUTE_URL))
+            ->setCancelUrl($this->router->generate('shop_credit', [], Router::ABSOLUTE_URL));
 
         $payment->setRedirectUrls($redirectUrls);
         $payment->setPayer((new Payer())->setPaymentMethod('paypal'));
 
-        $payment->addTransaction($this->parseInvoice($invoice));
+        $payment->addTransaction($this->generateItem($price));
         $payment->create($this->apiContext);
         return $payment;
     }
 
-    public function parseInvoice($price)
+    public function generateItem($price)
     {
-        $list = new ItemList($price);
-
         $item = (new Item())
             ->setName('Don telethon')
             ->setPrice($price)
             ->setDescription('Don pour le telethon')
             ->setCurrency('EUR')
             ->setQuantity(1);
+
+        $list = (new ItemList())->setItems(array($item));
 
         $details = (new Details())
             ->setSubtotal($price);
@@ -102,19 +102,21 @@ class PaypalPaymentService
         return (new Transaction())
             ->setItemList($list)
             ->setDescription('Kubithon')
-            ->setAmount($amount);
+            ->setAmount($amount)
+            ->setCustom($price);
 
     }
 
     public function executePayment(Request $request)
     {
-        $payment = Payment::get($request->get('paymentID'), $this->apiContext);
+        $payment = Payment::get($request->get('paymentId'), $this->apiContext);
         $execution = (new PaymentExecution())
-            ->setPayerId($request->get('payerID'))
+            ->setPayerId($request->get('PayerID'))
             ->addTransaction($payment->getTransactions()[0]);
 
         $payment->execute($execution, $this->apiContext);
         return $payment;
+
 
     }
 }

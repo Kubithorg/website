@@ -2,8 +2,8 @@
 
 namespace AppBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity
@@ -38,6 +38,11 @@ class User extends BaseUser
      * @ORM\JoinColumn(name="session_id", referencedColumnName="id", nullable=true)
      */
     private $session;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Transaction", mappedBy="user")
+     */
+    private $transations;
 
     public function __construct()
     {
@@ -108,5 +113,30 @@ class User extends BaseUser
         $this->session = $session;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTransations()
+    {
+        return $this->transations;
+    }
+
+    /**
+     * @param mixed $transations
+     */
+    public function setTransations($transations)
+    {
+        $this->transations = $transations;
+    }
+
+    public function increaseBalance($price)
+    {
+        $this->balance += $price;
+    }
+
+    public function decreaseBalance($price)
+    {
+        $this->balance -= $price;
+    }
 
 }

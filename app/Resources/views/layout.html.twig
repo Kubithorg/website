@@ -68,8 +68,44 @@
         {% block content %}{% endblock %}
     </div>
 
-    {% block javascripts %}{% endblock %}
+    {% for message in app.flashes('success') %}
+        <div class="modal is-active" id="success_modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="notification is-primary">
+                    {{ message|raw }}
+                </div>
+                <button class="modal-close is-large" id="success_modal_close"></button>
+            </div>
+        </div>
 
+        <script>
+            $('#success_modal_close').click(function () {
+                $('#success_modal').removeClass('is-active');
+            });
+        </script>
+
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="modal is-active" id="error_modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="notification is-danger">
+                    {{ message|raw }}
+                </div>
+                <button class="modal-close is-large" id="error_modal_close"></button>
+            </div>
+        </div>
+
+        <script>
+            $('#error_modal_close').click(function () {
+                $('#error_modal').removeClass('is-active');
+            });
+        </script>
+    {% endfor %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110956458-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -79,5 +115,14 @@
         gtag('config', 'UA-110956458-1');
     </script>
 
+    {% block javascripts %}{% endblock %}
+    <script>
+        $(document).on('keyup', function (evt) {
+            if (evt.keyCode == 27) {
+                $('#error_modal_modal').removeClass('is-active');
+                $('#success_modal').removeClass('is-active');
+            }
+        });
+    </script>
 </body>
 </html>
