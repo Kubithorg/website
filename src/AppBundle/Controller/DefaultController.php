@@ -147,4 +147,13 @@ class DefaultController extends Controller
             'streams_html' => trim($streams_html)
         ]);
     }
+
+    /**
+     * @Route("/goals-update", name="legacy_goals_update")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function legacyUpdateAction()
+    {
+        return $this->redirectToRoute('homepage_update');
+    }
 }
