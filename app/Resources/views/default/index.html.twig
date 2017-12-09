@@ -5,59 +5,27 @@
 
 {% block javascripts %}
     <script type="text/javascript" src="{{ asset('bundles/app/js/utils.js') }}"></script>
+
+    <script type="text/javascript">
+        var goals_update_url = {{ path('goals_update')|json_encode|raw }};
+    </script>
+
     <script type="text/javascript" src="{{ asset('bundles/app/js/homepage.js') }}"></script>
 {% endblock %}
 
 {% block hero_body %}
     <div class="container has-text-centered main-title donation">
-        <p class="donation-amount">Grâce à vous, nous avons déjà récolté <span>{{ current_gain|number_format }} €</span></p>
+
+        <p class="donation-amount">Grâce à vous, nous avons déjà récolté <span id="kubithon-donations-amount">{{ current_gain|number_format }}&nbsp;&euro;</span></p>
         <div class="goals">
-            <progress class="progress is-success" value="{{ current_gain }}" max="{{ max_gain }}">
-                {{ current_gain|number_format }} €
+            <progress id="kubithon-donations-bar" class="progress is-success" value="{{ current_gain }}" max="{{ max_gain }}">
+                {{ current_gain|number_format }}&nbsp;&euro;
             </progress>
-            <ul class="progress-goals">
-                {% if previous_goal %}
-                    <li
-                        style="margin-left: {{ previous_goal.percentage * 100 }}%"
-                        class="previous-goal"
-                        {% if previous_goal.percentage > 0.5 %}class="right-tick"{% endif %}>
-                        <span aria-hidden="true"></span>
-                        <aside>
-                            <div>
-                                <h4>{{ previous_goal.amount|number_format }} €</h4>
-                                <p>
-                                    <span class="tag is-primary">ATTEINT</span>
-                                </p>
-                                <p>
-                                    {{ previous_goal.description|raw }}
-                                </p>
-                                {% if previous_goal.achievedMessage %}
-                                    <hr />
-                                    <p>
-                                        {{ previous_goal.achievedMessage|raw }}
-                                    </p>
-                                {% endif %}
-                            </div>
-                        </aside>
-                    </li>
-                {% endif %}
-                {% for goal in goals %}
-                    <li
-                        style="margin-left: {{ goal.percentage * 100 }}%"
-                        {% if goal.percentage > 0.5 %}class="right-tick"{% endif %}>
-                        <span aria-hidden="true"></span>
-                        <aside>
-                            <div>
-                                <h4>{{ goal.amount|number_format }} €</h4>
-                                <p>
-                                    {{ goal.description|raw }}
-                                </p>
-                            </div>
-                        </aside>
-                    </li>
-                {% endfor %}
+            <ul class="progress-goals" id="kubithon-donations-goals" data-hash="{{ hash }}">
+                {% include 'default/goals_bar.part.html.twig' %}
             </ul>
         </div>
+
         <a href="https://soutenir.afm-telethon.fr/kubithon" class="button-kubithon" target="_blank">
             Donner au Téléthon
         </a>
@@ -84,10 +52,9 @@
         <p>Vivez le Kubithon de l'intérieur !</p>
         <p>Il vous suffit de télécharger l'installeur ci-dessous et de double-cliquer sur le fichier téléchargé.<br />Fonctionne pour les versions premium ou non.</p>
 
-
-        <p style="margin-top: 2em; margin-bottom: 0;">
+        <p class="download-link">
             <a href="https://github.com/Kubithorg/launcher/releases/tag/v1.1.2"
-               class="button-kubithon" target="_blank" style="font-size: 1em;">
+               class="button-kubithon" target="_blank">
             Télécharger le lanceur
             </a>
         </p>
@@ -193,7 +160,13 @@
             </a>
         </p>
 
-        <p><em>Le planning des conférences sera prochainement affiché ici. Elles commencent le samedi.</em></p>
+        <p>
+            Le planning des conférences est présenté ci-dessous.
+        </p>
+        <figure>
+            <img src="{{ asset('bundles/app/images/planning-conferences.png') }}" alt="Planning des conférences">
+            <figcaption>Le planning des conférences</figcaption>
+        </figure>
     </section>
 
     <section class="section download" id="download">

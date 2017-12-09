@@ -19,11 +19,7 @@ class DefaultController extends Controller
         return $cfg->getValue();
     }
 
-    /**
-     * @Route("/", name="homepage")
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function indexAction()
+    private function getDonationsBarData()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -43,8 +39,8 @@ class DefaultController extends Controller
             ORDER BY
                 g.amount ASC'
         )->setParameter('current_gain', $current_gain)
-         ->setParameter('max_gain', $max_gain)
-         ->getResult();
+            ->setParameter('max_gain', $max_gain)
+            ->getResult();
 
         $previous_goal = $em->createQuery('
             SELECT
@@ -62,6 +58,26 @@ class DefaultController extends Controller
           ->setMaxResults(1)
           ->getOneOrNullResult();
 
+        $donations_bar_data = [
+            'current_gain'  => $current_gain,
+            'max_gain'      => $max_gain,
+            'goals'         => $goals,
+            'previous_goal' => $previous_goal
+        ];
+
+        $donations_bar_hash = sha1(serialize($donations_bar_data));
+
+        return array_merge($donations_bar_data, [
+            'hash' => $donations_bar_hash
+        ]);
+    }
+
+    /**
+     * @Route("/", name="homepage")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function indexAction()
+    {
         $streams_repository = $this
             ->getDoctrine()
             ->getRepository('AppBundle:Stream');
@@ -69,14 +85,34 @@ class DefaultController extends Controller
         $main_stream = $streams_repository->findOneBy(['is_main' => true, 'is_enabled' => true]);
         $streams = $streams_repository->findBy(['is_main' => false, 'is_enabled' => true]);
 
-        return $this->render('default/index.html.twig', [
+        $donations_bar_data = $this->getDonationsBarData();
+
+        return $this->render('default/index.html.twig', array_merge([
             'base_dir'      => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-            'current_gain'  => $current_gain,
-            'max_gain'      => $max_gain,
-            'goals'         => $goals,
-            'previous_goal' => $previous_goal,
             'main_stream'   => $main_stream,
             'streams'       => $streams
+        ], $donations_bar_data));
+    }
+
+    /**
+     * @Route("/goals-update", name="goals_update")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function updateBarAction()
+    {
+        $donations_bar_data = $this->getDonationsBarData();
+
+        try {
+            $goals_html = $this->container->get('twig')->render('default/goals_bar.part.html.twig', $donations_bar_data);
+        } catch (\Twig_Error $e) {
+            $goals_html = null;
+        }
+
+        return $this->json([
+            'current_gain' => $donations_bar_data['current_gain'],
+            'max_gain' => $donations_bar_data['max_gain'],
+            'hash' => $donations_bar_data['hash'],
+            'goals_html' => trim($goals_html)
         ]);
     }
 }

@@ -126,6 +126,10 @@ header.navbar {
         text-align: justify;
     }
 
+    figure {
+        text-align: center;
+    }
+
     &.main-page-container {
         font-size: 1.2em;
 
@@ -145,6 +149,10 @@ header.navbar {
                 margin: 0 auto;
                 height: 1px;
             }
+
+            @include mobile {
+                font-size: 2.2em;
+            }
         }
 
         p {
@@ -154,6 +162,10 @@ header.navbar {
 
             @include mobile {
                 font-size: 1.1em;
+
+                .button-kubithon {
+                    font-size: 1.3em;
+                }
             }
         }
 

@@ -1,0 +1,41 @@
+
+        {% if previous_goal %}
+            <li
+                    style="margin-left: {{ previous_goal.percentage * 100 }}%"
+                    class="previous-goal"
+                    {% if previous_goal.percentage > 0.5 %}class="right-tick"{% endif %}>
+                <span aria-hidden="true"></span>
+                <aside>
+                    <div>
+                        <h4>{{ previous_goal.amount|number_format }} €</h4>
+                        <p>
+                            <span class="tag is-primary">ATTEINT</span>
+                        </p>
+                        <p>
+                            {{ previous_goal.description|raw }}
+                        </p>
+                        {% if previous_goal.achievedMessage %}
+                            <hr />
+                            <p>
+                                {{ previous_goal.achievedMessage|raw }}
+                            </p>
+                        {% endif %}
+                    </div>
+                </aside>
+            </li>
+        {% endif %}
+        {% for goal in goals %}
+            <li
+                    style="margin-left: {{ goal.percentage * 100 }}%"
+                    {% if goal.percentage > 0.5 %}class="right-tick"{% endif %}>
+                <span aria-hidden="true"></span>
+                <aside>
+                    <div>
+                        <h4>{{ goal.amount|number_format }} €</h4>
+                        <p>
+                            {{ goal.description|raw }}
+                        </p>
+                    </div>
+                </aside>
+            </li>
+        {% endfor %}

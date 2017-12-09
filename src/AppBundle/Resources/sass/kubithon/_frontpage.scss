@@ -263,6 +263,12 @@
 		.is-divider-vertical::before {
 			bottom: 0;
 		}
+
+		@include mobile {
+			.is-divider-vertical {
+				display: none;
+			}
+		}
 	}
 }
 
@@ -284,4 +290,12 @@ section.list-streams {
             margin-bottom: 0;
         }
     }
+}
+
+
+section.section-download {
+	.download-link {
+		margin-top: 2em;
+		margin-bottom: 0;
+	}
 }
