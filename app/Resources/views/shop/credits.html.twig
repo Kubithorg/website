@@ -11,30 +11,25 @@
             <div class="message-header">
                 <p>Bonjour {{ app.user.username }} !</p>
             </div>
-            <div class="message-body">
-                <div class="columns is-centered">
-                    <div class="column is-10">
-                        Vous disposez de <strong>{{ app.user.balance }} €</strong> sur votre compte.
-                    </div>
-                </div>
+            <div class="message-body is-centered">
+                Vous disposez de <strong>{{ app.user.balance }} €</strong> sur votre compte.
             </div>
         </article>
 
         <p>
-            Pour acheter sur la boutique, vous devez au préalable recharger votre compte avec de l'argent. <br>Pour ce
-            faire, <strong>choisissez votre moyen de payment</strong>.
+            Pour acheter sur la boutique, vous devez au préalable recharger votre compte avec de l'argent. <br />
+            Pour ce faire, <strong>choisissez votre moyen de payment</strong>.
         </p>
 
-        <br><br>
-        <div class="columns is-centered">
+        <div class="columns is-centered" style="margin-top: 2em">
             <div class="column is-4">
                 <a href="" class="button-kubithon" id="paypal">
-                    Paypal
+                    <span class="fa fa-paypal"></span>&nbsp;&nbsp;Paypal
                 </a>
             </div>
             <div class="column is-4">
                 <a href="" class="button-kubithon" id="mcg">
-                    Téléphone/SMS
+                    <span class="fa fa-mobile-phone"></span>&nbsp;&nbsp;Téléphone/SMS
                 </a>
             </div>
         </div>
@@ -44,13 +39,14 @@
             <div class="modal-content">
                 <div class="box">
                     <div class="has-text-centered">
-                        <strong>Payer avec paypal</strong><br><br>
-                        <a class="button is-primary" href="{{ path('payment_generate', {price: 5}) }}">5&euro;</a>
-                        <a class="button is-primary" href="{{ path('payment_generate', {price: 10}) }}">10&euro;</a>
-                        <a class="button is-primary" href="{{ path('payment_generate', {price: 15}) }}">15&euro;</a>
-                        <a class="button is-primary" href="{{ path('payment_generate', {price: 20}) }}">20&euro;</a>
+                        <h3>Créditer votre compte avec PayPal</h3>
+                        <p>
+                            <a class="button is-primary is-large" href="{{ path('payment_generate', {price: 5}) }}">5&nbsp;&euro;</a>
+                            <a class="button is-primary is-large" href="{{ path('payment_generate', {price: 10}) }}">10&nbsp;&euro;</a>
+                            <a class="button is-primary is-large" href="{{ path('payment_generate', {price: 15}) }}">15&nbsp;&euro;</a>
+                            <a class="button is-primary is-large" href="{{ path('payment_generate', {price: 20}) }}">20&nbsp;&euro;</a>
+                        </p>
                     </div>
-
                 </div>
             </div>
             <button class="modal-close is-large" id="paypal_modal_close"></button>
@@ -64,7 +60,7 @@
             <div class="message-body">
                 <div class="columns is-centered">
                     <div class="column is-10">
-                        Vous devez être identifié pour acheter sur la boutique. Accordez trente secondes !<br />
+                        Vous devez être identifié pour acheter sur la boutique. Il vous faut trente secondes !<br />
                         Commencez en cliquant sur le bouton à doite…
                     </div>
                     <div class="column is-2">
@@ -78,26 +74,11 @@
 
 {% block javascripts %}
     {% if app.user %}
-        <script>
+        <script type="text/javascript">
             $('#paypal').click(function (e) {
                 e.preventDefault();
                 $('#paypal_modal').addClass('is-active');
             });
-
-            $('#paypal_modal_close').click(function (e) {
-                $('#paypal_modal').removeClass('is-active');
-            });
-
-            $('#success_modal_close').click(function (e) {
-                $('#success_modal').removeClass('is-active');
-            });
-
-            $(document).on('keyup', function (evt) {
-                if (evt.keyCode == 27) {
-                    $('#paypal_modal').removeClass('is-active');
-                }
-            });
-
         </script>
     {% endif %}
 {% endblock %}

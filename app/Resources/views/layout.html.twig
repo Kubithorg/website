@@ -105,7 +105,21 @@
         </script>
     {% endfor %}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).on('keyup', function (evt) {
+            if (evt.keyCode == 27)
+            {
+                $('.modal').removeClass('is-active');
+            }
+        });
+        $('.modal-background, .modal-close').click(function (e) {
+            $(this).parent('.modal').removeClass('is-active');
+        });
+    </script>
+
+    {% block javascripts %}{% endblock %}
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110956458-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -113,16 +127,6 @@
         gtag('js', new Date());
 
         gtag('config', 'UA-110956458-1');
-    </script>
-
-    {% block javascripts %}{% endblock %}
-    <script>
-        $(document).on('keyup', function (evt) {
-            if (evt.keyCode == 27) {
-                $('#error_modal_modal').removeClass('is-active');
-                $('#success_modal').removeClass('is-active');
-            }
-        });
     </script>
 </body>
 </html>
