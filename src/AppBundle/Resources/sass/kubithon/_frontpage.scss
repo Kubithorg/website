@@ -209,27 +209,11 @@
 		}
 	}
 
-	a.button.is-donation {
-		display: inline-block;
-
-		font-size: 1em;
-		height: 3.4em;
-
-		span {
-			display: block ;
-			font-size: .7em;
-		}
-	}
-
-	.button-kubithon {
-		font-size: 1em;
-		padding-top: 2px;
-		margin-bottom: .3em;
-	}
-	.button-kubithon-subtitle {
-		font-size: .5em;
-		font-family: 'Raleway', $family-sans-serif;
-	}
+    .button-kubithon {
+        font-size: 1.05em;
+        padding-top: 2px;
+        margin-bottom: .3em;
+    }
 }
 
 
@@ -273,6 +257,19 @@
 }
 
 
+section {
+    .button-kubithon {
+        font-size: 1.1em;
+        padding-top: 6px;
+        margin-bottom: .3em;
+    }
+    .button-kubithon-subtitle {
+        font-size: .5em;
+        font-family: 'Raleway', $family-sans-serif;
+    }
+}
+
+
 section.list-streams {
     .columns.is-multiline {
         margin-top: 2em;
@@ -288,6 +285,7 @@ section.list-streams {
         }
         p.subtitle {
             margin-bottom: 0;
+            font-size: 1.1em;
         }
     }
 }

@@ -1,0 +1,55 @@
+<h1>Suivre l'événement en <em>live</em></h1>
+<p>Profitez des nombreux <em>streamers</em> qui rediffusent l'événement en direct !</p>
+
+{% macro stream(stream, is_main) %}
+    <div class="card has-ribbon">
+        <div class="ribbon {% if stream.live %}is-danger{% endif %} is-large">
+            <span class="fa fa-circle"></span>&nbsp;&nbsp;{% if stream.live %}LIVE{% else %}HORS LIGNE{% endif %}
+        </div>
+        {%  if stream.bannerName %}
+            <div class="card-image" aria-hidden="true">
+                <a href="{{ stream.url }}">
+                    <figure class="image">
+                        <img src="/uploads/images/streams/{{ stream.bannerName }}" alt="Bannière" />
+                    </figure>
+                </a>
+            </div>
+        {% endif %}
+        <div class="card-content">
+            <div class="media">
+                {% if stream.authorLogoName %}
+                    <div class="media-left" aria-hidden="true">
+                        <figure class="image is-48x48">
+                            <img src="/uploads/images/streams_authors/{{ stream.authorLogoName }}" alt="{{ stream.title }}" />
+                        </figure>
+                    </div>
+                {% endif %}
+                <div class="media-content columns">
+                    <div class="column is-7">
+                        <p class="title is-3">{{ stream.title }}</p>
+                        <p class="subtitle is-5">{{ stream.subtitle }}</p>
+                    </div>
+                    <div class="column is-5 has-text-right">
+                        <a href="{{ stream.url }}" class="button is-primary is-large">
+                            Voir la diffusion
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% import _self as s %}
+
+{%  if main_stream %}
+    {{ s.stream(main_stream) }}
+{% endif %}
+
+<div class="columns is-multiline">
+    {% for stream in streams %}
+        <div class="column is-6">
+            {{ s.stream(stream) }}
+        </div>
+    {% endfor %}
+</div>

@@ -7,7 +7,7 @@
     <script type="text/javascript" src="{{ asset('bundles/app/js/utils.js') }}"></script>
 
     <script type="text/javascript">
-        var goals_update_url = {{ path('goals_update')|json_encode|raw }};
+        var update_url = {{ path('homepage_update')|json_encode|raw }};
     </script>
 
     <script type="text/javascript" src="{{ asset('bundles/app/js/homepage.js') }}"></script>
@@ -21,7 +21,7 @@
             <progress id="kubithon-donations-bar" class="progress is-success" value="{{ current_gain }}" max="{{ max_gain }}">
                 {{ current_gain|number_format }}&nbsp;&euro;
             </progress>
-            <ul class="progress-goals" id="kubithon-donations-goals" data-hash="{{ hash }}">
+            <ul class="progress-goals" id="kubithon-donations-goals" data-hash="{{ goals_hash }}">
                 {% include 'default/goals_bar.part.html.twig' %}
             </ul>
         </div>
@@ -60,93 +60,8 @@
         </p>
     </section>
 
-    <section class="section list-streams" id="live">
-        <h1>Suivre l'événement en <em>live</em></h1>
-        <p>Profitez des nombreux <em>streamers</em> qui rediffusent l'événement en direct !</p>
-
-        {# TODO 2018 : code dupliqué #}
-
-        {%  if main_stream %}
-            <div class="card has-ribbon">
-                <div class="ribbon {% if main_stream.live %}is-danger{% endif %} is-large">
-                    <span class="fa fa-circle"></span>&nbsp;&nbsp;{% if main_stream.live %}LIVE{% else %}HORS LIGNE{% endif %}
-                </div>
-                {%  if main_stream.bannerName %}
-                <div class="card-image" aria-hidden="true">
-                    <a href="{{ main_stream.url }}">
-                        <figure class="image">
-                            <img src="/uploads/images/streams/{{ main_stream.bannerName }}" alt="Bannière" />
-                        </figure>
-                    </a>
-                </div>
-                {% endif %}
-                <div class="card-content">
-                    <div class="media">
-                        {% if main_stream.authorLogoName %}
-                        <div class="media-left" aria-hidden="true">
-                            <figure class="image is-48x48">
-                                <img src="/uploads/images/streams_authors/{{ main_stream.authorLogoName }}" alt="{{ main_stream.title }}" />
-                            </figure>
-                        </div>
-                        {% endif %}
-                        <div class="media-content columns">
-                            <div class="column is-7">
-                                <p class="title is-3">{{ main_stream.title }}</p>
-                                <p class="subtitle is-5">{{ main_stream.subtitle }}</p>
-                            </div>
-                            <div class="column is-5 has-text-right">
-                                <a href="{{ main_stream.url }}" class="button is-primary is-large">
-                                    Voir la diffusion
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endif %}
-
-        <div class="columns is-multiline">
-            {% for stream in streams %}
-                <div class="column is-6">
-                    <div class="card has-ribbon">
-                        <div class="ribbon {% if stream.live %}is-danger{% endif %} is-large">
-                            <span class="fa fa-circle"></span>&nbsp;&nbsp;{% if stream.live %}LIVE{% else %}HORS LIGNE{% endif %}
-                        </div>
-                        {%  if stream.bannerName %}
-                            <div class="card-image" aria-hidden="true">
-                                <a href="{{ stream.url }}">
-                                    <figure class="image is-4by3">
-                                        <img src="/uploads/images/streams/{{ stream.bannerName }}" alt="Bannière" />
-                                    </figure>
-                                </a>
-                            </div>
-                        {% endif %}
-                        <div class="card-content">
-                            <div class="media">
-                                {% if stream.authorLogoName %}
-                                    <div class="media-left" aria-hidden="true">
-                                        <figure class="image is-48x48">
-                                            <img src="/uploads/images/streams_authors/{{ stream.authorLogoName }}" alt="{{ stream.title }}" />
-                                        </figure>
-                                    </div>
-                                {% endif %}
-                                <div class="media-content columns">
-                                    <div class="column is-7">
-                                        <p class="title is-3">{{ stream.title }}</p>
-                                        <p class="subtitle is-5">{{ stream.subtitle }}</p>
-                                    </div>
-                                    <div class="column is-5 has-text-right">
-                                        <a href="{{ stream.url }}" class="button is-primary is-large">
-                                            Voir la diffusion
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+    <section class="section list-streams" id="live" data-hash="{{ streams_hash }}">
+        {% include 'default/streams.part.html.twig' %}
     </section>
 
     <section class="section discord" id="discord">

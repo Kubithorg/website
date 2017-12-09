@@ -68,7 +68,28 @@ class DefaultController extends Controller
         $donations_bar_hash = sha1(serialize($donations_bar_data));
 
         return array_merge($donations_bar_data, [
-            'hash' => $donations_bar_hash
+            'goals_hash' => $donations_bar_hash
+        ]);
+    }
+
+    private function getStreamsData()
+    {
+        $streams_repository = $this
+            ->getDoctrine()
+            ->getRepository('AppBundle:Stream');
+
+        $main_stream = $streams_repository->findOneBy(['is_main' => true, 'is_enabled' => true]);
+        $streams = $streams_repository->findBy(['is_main' => false, 'is_enabled' => true]);
+
+        $streams_data = [
+            'main_stream' => $main_stream,
+            'streams'     => $streams
+        ];
+
+        $streams_hash = sha1(serialize($streams_data));
+
+        return array_merge($streams_data, [
+            'streams_hash' => $streams_hash
         ]);
     }
 
@@ -78,41 +99,52 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $streams_repository = $this
-            ->getDoctrine()
-            ->getRepository('AppBundle:Stream');
-
-        $main_stream = $streams_repository->findOneBy(['is_main' => true, 'is_enabled' => true]);
-        $streams = $streams_repository->findBy(['is_main' => false, 'is_enabled' => true]);
-
         $donations_bar_data = $this->getDonationsBarData();
+        $streams_data = $this->getStreamsData();
 
         return $this->render('default/index.html.twig', array_merge([
-            'base_dir'      => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-            'main_stream'   => $main_stream,
-            'streams'       => $streams
-        ], $donations_bar_data));
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ], $donations_bar_data, $streams_data));
     }
 
     /**
-     * @Route("/goals-update", name="goals_update")
+     * @Route("/update", name="homepage_update")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function updateBarAction()
+    public function updateAction()
     {
         $donations_bar_data = $this->getDonationsBarData();
+        $stream_data = $this->getStreamsData();
 
-        try {
-            $goals_html = $this->container->get('twig')->render('default/goals_bar.part.html.twig', $donations_bar_data);
-        } catch (\Twig_Error $e) {
+        $twig = $this->container->get('twig');
+
+        try
+        {
+            $goals_html = $twig->render('default/goals_bar.part.html.twig', $donations_bar_data);
+        }
+        catch (\Twig_Error $e)
+        {
             $goals_html = null;
+        }
+
+        try
+        {
+            $streams_html = $twig->render('default/streams.part.html.twig', $stream_data);
+        }
+        catch (\Twig_Error $e)
+        {
+            $streams_html = null;
         }
 
         return $this->json([
             'current_gain' => $donations_bar_data['current_gain'],
             'max_gain' => $donations_bar_data['max_gain'],
-            'hash' => $donations_bar_data['hash'],
-            'goals_html' => trim($goals_html)
+
+            'goals_hash' => $donations_bar_data['goals_hash'],
+            'goals_html' => trim($goals_html),
+
+            'streams_hash' => $stream_data['streams_hash'],
+            'streams_html' => trim($streams_html)
         ]);
     }
 }
