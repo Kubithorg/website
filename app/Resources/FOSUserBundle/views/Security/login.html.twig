@@ -3,34 +3,6 @@
 
 {% block content %}
 
-    <div class="row">
-
-        <div id="home" class="col-md-6 mx-auto">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="card text-white bg-primary" id="acc_offi" style="cursor: pointer">
-                        <div class="card-body">
-                            <h4 class="card-title">Compte officiel</h4>
-                            <p class="card-text">Si vous avez un compte minecraft officiel cliquez ici.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-sm-12">
-                    <div class="card text-white bg-dark" id="acc_crack" style="cursor: pointer">
-                        <div class="card-body">
-                            <h4 class="card-title">Compte non officiel</h4>
-                            <p class="card-text">Si vous n'avez pas de compte minecraft officiel cliquez ici.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="crack" style="" class="col-md-4 mx-auto">
-
-            <h4><i class="fa fa-arrow-left back"></i> Connexion</h4><br>
-
             {% if error %}
                 <div class="alert alert-danger alert-dismissible fade show">
                     <button type="button" class="close" data-dismiss="alert">
@@ -40,66 +12,61 @@
                 </div>
             {% endif %}
 
+    <div class="columns">
+        <div class="column is-offset-one-fifth is-3">
+            <p>Compte officiel</p>
+
+            <form action="{{ path('mojang_login') }}" method="post">
+
+                {% if csrf_token %}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+                {% endif %}
+
+                <div class="field">
+                    <div class="control">
+                        <input name="_username" class="input is-primary" type="text" required placeholder="Pseudo">
+                    </div>
+                </div>
+                <div class="has-text-right">
+                    <input type="submit" id="_submit" name="_submit" value="Connexion"
+                           class="button is-primary is-medium"/>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="is-divider-vertical" data-content="OR"></div>
+
+        <div class="column is-3">
+            <p>Compte non officiel</p>
             <form action="{{ path("fos_user_security_check") }}" method="post">
 
                 {% if csrf_token %}
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
                 {% endif %}
 
-                <div class="form-group">
-                    <input id="username" name="_username" class="form-control" required placeholder="Pseudo">
-                </div>
-
-                <div class="form-group">
-                    <input type="password" id="password" name="_password" class="form-control" required placeholder="Mot de passe">
-                </div>
-
-                <div class="row">
-                    <div class="col-auto mr-auto">
-                        <a href="#" class="btn btn-outline-dark">Inscription</a>
-                    </div>
-                    <div class="col-auto">
-                        <input type="submit" id="_submit" name="_submit" value="Connexion"
-                               class="button is-primary is-medium"/>
+                <div class="field">
+                    <div class="control">
+                        <input name="_username" class="input is-primary" type="text" required placeholder="Pseudo">
                     </div>
                 </div>
 
-            </form>
-
-        </div>
-
-        <div id="leggit" style="" class="col-md-4 mx-auto">
-
-            <h4><i class="fa fa-arrow-left back"></i> Connexion</h4><br>
-
-            {% if error %}
-                <div class="alert alert-danger alert-dismissible fade show">
-                    <button type="button" class="close" data-dismiss="alert">
-                        <span>&times;</span>
-                    </button>
-                    <strong>Erreur !</strong> {{ error }}
-                </div>
-            {% endif %}
-
-            <form action="{{ path("fos_user_security_check") }}" method="post">
-
-                {% if csrf_token %}
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
-                {% endif %}
-
-                <div class="form-group">
-                    <input id="username" name="_username" class="form-control" required placeholder="Pseudo">
+                <div class="field">
+                    <div class="control">
+                        <input name="_password" class="input is-primary" type="password" required
+                               placeholder="Mot de passe">
+                    </div>
                 </div>
 
-                <div class="text-right">
-                    <input type="submit" id="_submit" name="_submit" value="Connexion" class="btn btn-primary"/>
+                <div class="has-text-right">
+                    <input type="submit" id="_submit" name="_submit" value="Connexion"
+                           class="button is-primary is-medium"/>
                 </div>
 
             </form>
-
         </div>
-
     </div>
+
 
 {% endblock content %}
 

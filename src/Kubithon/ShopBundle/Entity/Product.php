@@ -54,6 +54,11 @@ class Product
     private $activated;
 
     /**
+     * @ORM\Column(type="text")
+     */
+    private $command;
+
+    /**
      * @ORM\Column(type="datetime")
      * @var \DateTime
      */
@@ -183,6 +188,22 @@ class Product
     public function prePersist()
     {
         $this->activated = false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommand()
+    {
+        return $this->command;
+    }
+
+    /**
+     * @param mixed $command
+     */
+    public function setCommand($command): void
+    {
+        $this->command = $command;
     }
 
 }

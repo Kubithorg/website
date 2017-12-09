@@ -3,6 +3,7 @@
 namespace Kubithon\ShopBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
@@ -34,6 +35,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/credit", name="shop_credit")
+     * @Security("has_role('ROLE_USER')")
      */
     public function creditAction()
     {

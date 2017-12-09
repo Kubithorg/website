@@ -55,7 +55,7 @@ class RegistrationController extends Controller
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
 
-                $mojangResponse = file_get_contents('https://api.mojang.com/users/profiles/minecraft/'.$user->getUsername().'?at=0');
+                $mojangResponse = file_get_contents('https://api.mojang.com/users/profiles/minecraft/' . $user->getUsername());
                 $mojangResponse = json_decode($mojangResponse);
 
                 if (isset($mojangResponse->name) && $mojangResponse->name == $user->getUsername()) {

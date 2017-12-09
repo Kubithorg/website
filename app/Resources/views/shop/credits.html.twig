@@ -52,6 +52,44 @@
             <button class="modal-close is-large" id="paypal_modal_close"></button>
         </div>
 
+
+        <div class="modal" id="mcg_modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <div class="has-text-centered">
+
+                        <button id="fr" class="button is-primary is-active is-large">France</button>
+                        <button id="dom" class="button is-primary is-large">France DOM</button>
+                        <button id="bel" class="button is-primary is-large">Belgique</button>
+                        <br><br>
+
+                        Chaque code validé créditera votre compte de 1,50&euro;
+                        <br><br>
+                        <div class="cartouche">
+                            <div id="phone">08 90 24 31 20</div>
+                        </div>
+                        <br>
+                        <form action="{{ path('code_validate') }}" method="post">
+                            <div class="column is-half is-offset-one-quarter">
+                                <div class="field">
+                                    <div class="control">
+                                        <input class="input is-primary" name="code" type="text"
+                                               placeholder="Entrez ici le code reçu">
+                                    </div>
+                                </div>
+                                <input type="hidden" name="palier" id="palier" value="A300_1FR">
+                                <button id="bel" class="button is-primary">Valider</button>
+                                <br><br>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <button class="modal-close is-large" id="paypal_modal_close"></button>
+        </div>
+
     {% else %}
         <article class="message is-primary is-medium">
             <div class="message-header">
@@ -79,6 +117,65 @@
                 e.preventDefault();
                 $('#paypal_modal').addClass('is-active');
             });
+
+            $('#mcg').click(function (e) {
+                e.preventDefault();
+                $('#mcg_modal').addClass('is-active');
+            });
+
+            $('#bel').click(function (e) {
+                $('#bel').addClass('is-active');
+                $('#fr').removeClass('is-active');
+                $('#dom').removeClass('is-active');
+
+                $('#phone').html('090 999 215');
+                $('#palier').val('A350_BE');
+            });
+
+            $('#dom').click(function (e) {
+                $('#bel').removeClass('is-active');
+                $('#fr').removeClass('is-active');
+                $('#dom').addClass('is-active');
+
+                $('#phone').html('08 90 24 31 20');
+                $('#palier').val('A300_1FRD');
+
+            });
+
+            $('#fr').click(function (e) {
+                $('#bel').removeClass('is-active');
+                $('#fr').addClass('is-active');
+                $('#dom').removeClass('is-active');
+
+                $('#phone').html('08 90 24 31 01');
+                $('#palier').val('A300_1FR');
+
+            });
         </script>
     {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/kubithon.min.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        .cartouche {
+            background: url("https://i.kubithon.org/svi.png") no-repeat center;
+            background-size: 400px;
+            height: 44px;
+        }
+
+        .cartouche #phone {
+            float: left;
+            width: 220px;
+            font-family: Arial, sans-serif;
+            font-size: 30px;
+            color: #A40F78;
+            font-weight: bold;
+            margin-left: 105px;
+            margin-top: 2px;
+        }
+
+    </style>
 {% endblock %}

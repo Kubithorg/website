@@ -148,11 +148,18 @@ easy_admin:
                     - { property: 'price', label: 'Prix', type: 'integer' }
                     - { property: 'imageFile', label: 'Image', type: 'vich_image', base_path: '/uploads/images/products' }
                     - { property: 'description', label: 'Description', type: 'ckeditor' }
+                    - { property: 'command', label: 'Commandes (Séparés par ||)', type: 'textarea' }
 
             edit:
                 title: 'Supprimer un produit'
                 fields:
                      - { property: 'id', label: 'Id', type_options: { disabled: true } }
+                     - { property: 'name', label: 'Nom' }
+                     - { property: 'price', label: 'Prix', type: 'integer' }
+                     - { property: 'imageFile', label: 'Image', type: 'vich_image', base_path: '/uploads/images/products' }
+                     - { property: 'description', label: 'Description', type: 'ckeditor' }
+                     - { property: 'command', label: 'Commandes (Séparés par ||)', type: 'textarea' }
+
 
         Goal:
             label: 'Objectifs de dons'

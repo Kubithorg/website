@@ -22,6 +22,7 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "javiereguiluz/easyadmin-bundle": "^1.17",
       "paypal/rest-api-sdk-php": "^1.13",
+      "predis/predis": "^1.1",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^3.0.2",
       "snc/redis-bundle": "^2.0",
