@@ -197,6 +197,8 @@ easy_admin:
                     - { property: 'subtitle', label: 'Sous-titre/accroche' }
                     - { property: 'url', label: 'URL' }
                     - { property: 'is_main', label: 'Diffusion principale (unique)', type: 'toggle' }
+                    - { property: 'is_enabled', label: 'Diffusion visible', type: 'toggle' }
+                    - { property: 'is_live', label: 'Diffusion active', type: 'toggle' }
 
             new:
                 title: 'Nouvelle diffusion'

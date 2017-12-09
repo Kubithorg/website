@@ -74,8 +74,8 @@
 
         {%  if main_stream %}
             <div class="card has-ribbon">
-                <div class="ribbon is-danger is-large">
-                    <span class="fa fa-circle"></span>&nbsp;&nbsp;LIVE
+                <div class="ribbon {% if main_stream.live %}is-danger{% endif %} is-large">
+                    <span class="fa fa-circle"></span>&nbsp;&nbsp;{% if main_stream.live %}LIVE{% else %}HORS LIGNE{% endif %}
                 </div>
                 {%  if main_stream.bannerName %}
                 <div class="card-image" aria-hidden="true">
@@ -115,8 +115,8 @@
             {% for stream in streams %}
                 <div class="column is-6">
                     <div class="card has-ribbon">
-                        <div class="ribbon is-danger is-large">
-                            <span class="fa fa-circle"></span>&nbsp;&nbsp;LIVE
+                        <div class="ribbon {% if stream.live %}is-danger{% endif %} is-large">
+                            <span class="fa fa-circle"></span>&nbsp;&nbsp;{% if stream.live %}LIVE{% else %}HORS LIGNE{% endif %}
                         </div>
                         {%  if stream.bannerName %}
                             <div class="card-image" aria-hidden="true">
@@ -176,7 +176,7 @@
             <a href="https://www.ipgarde.com/" target="_blank">
                 <img src="https://i.kubithon.org/IPGARDE.jpg" alt="IPGarde" style="height: 8em;"/>
             </a>
-            <p>Un hébergeur en or, sans qui le kubithon ne serait pas !</p>
+            <p>Un hébergeur en or, sans qui le Kubithon ne serait pas !</p>
         </div>
         <br><br>
 
@@ -212,9 +212,11 @@
         </div>
 
         <div class="has-text-centered">
-            <p>Revolta Hosting ainsi que Harmony-Hosting nous permettent de vous faire gagner des lots incroyables et
+            <p>
+                Revolta Hosting ainsi que Harmony-Hosting nous permettent de vous faire gagner des lots incroyables et
                 mettent en place des promotions du tonnerre, tandis que Shadow.Tech nous permet de vous streamer
-                l'événement sur toute la durée du weekend. Si ça c'est pas beau !</p>
+                l'événement sur toute la durée du weekend. Si ça c'est pas beau !
+            </p>
         </div>
 
     </section>

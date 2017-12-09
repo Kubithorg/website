@@ -80,6 +80,21 @@ class Stream
      */
     private $is_main = false;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_enabled", type="boolean")
+     */
+    private $is_enabled = true;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_live", type="boolean")
+     */
+    private $is_live = true;
+
+
 
     /**
      * Get id
@@ -226,6 +241,38 @@ class Stream
         $this->is_main = $is_main;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        return $this->is_enabled;
+    }
+
+    /**
+     * @param bool $is_enabled
+     */
+    public function setIsEnabled($is_enabled)
+    {
+        $this->is_enabled = $is_enabled;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLive()
+    {
+        return $this->is_live;
+    }
+
+    /**
+     * @param bool $is_live
+     */
+    public function setIsLive($is_live)
+    {
+        $this->is_live = $is_live;
     }
 
     /**

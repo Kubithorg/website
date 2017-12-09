@@ -50,8 +50,8 @@ class DefaultController extends Controller
             ->getDoctrine()
             ->getRepository('AppBundle:Stream');
 
-        $main_stream = $streams_repository->findOneBy(['is_main' => true]);
-        $streams = $streams_repository->findBy(['is_main' => false]);
+        $main_stream = $streams_repository->findOneBy(['is_main' => true, 'is_enabled' => true]);
+        $streams = $streams_repository->findBy(['is_main' => false, 'is_enabled' => true]);
 
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
