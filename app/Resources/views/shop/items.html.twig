@@ -5,6 +5,8 @@
     <h2 class="subtitle">Donnez au Téléthon, en échange d'avantages en jeu !</h2>
 {% endblock %}
 
+{% block container_classes %}main-page-container shop-container{% endblock %}
+
 {% block content %}
     {% if app.user %}
         <article class="message is-primary is-medium">
@@ -18,7 +20,10 @@
                     </div>
                     <div class="column is-3 has-test-right">
                         <a class="button is-primary" href="{{ path('shop_credit') }}">Créditer mon compte</a>
-                        <a class="button is-warning" href="/logout">Déconnexion</a>
+                        <a class="button is-warning" href="/logout" title="Déconnexion">
+                            <span class="fa fa-sign-out"></span>
+                            <span class="sr-only">Déconnexion</span>
+                        </a>
                     </div>
                 </div>
             </div>

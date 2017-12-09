@@ -11,7 +11,11 @@
 
     <div class="columns">
         <div class="column is-offset-one-fifth is-3">
-            <p>Compte officiel</p>
+            <h3>Compte officiel</h3>
+
+            <p>
+                Assurez-vous d'être connecté sur le serveur Minecraft et <strong>entrez votre pseudo</strong> ci-dessous. Vous allez recevoir un lien en jeu pour valider votre inscription.
+            </p>
 
             <form action="{{ path('mojang_login') }}" method="post">
 
@@ -21,7 +25,7 @@
 
                 <div class="field">
                     <div class="control">
-                        <input name="_username" class="input is-primary" type="text" required placeholder="Pseudo">
+                        <input name="_username" class="input is-primary" type="text" required placeholder="Pseudo Minecraft">
                     </div>
                 </div>
                 <div class="has-text-right">
@@ -35,7 +39,12 @@
         <div class="is-divider-vertical" data-content="OR"></div>
 
         <div class="column is-3">
-            <p>Compte non officiel</p>
+            <h3>Compte non officiel</h3>
+
+            <p>
+                Si vous n'avez pas de compte premium, vous devez <a href="{{ path('fos_user_registration_register') }}">vous inscrire sur le site</a>, et vous connecter ici ensuite.
+            </p>
+
             <form action="{{ path("fos_user_security_check") }}" method="post">
 
                 {% if csrf_token %}
@@ -66,24 +75,3 @@
 
 
 {% endblock content %}
-
-{% block javascripts %}
-    <script>
-        $('#acc_crack').click(function () {
-            $('#home').hide();
-            $('#leggit').hide();
-            $('#crack').show();
-        });
-        $('#acc_offi').click(function () {
-            $('#home').hide();
-            $('#crack').hide();
-            $('#leggit').show();
-        });
-
-        $('.back').click(function () {
-            $('#crack').hide();
-            $('#leggit').hide();
-            $('#home').show();
-        })
-    </script>
-{% endblock %}

@@ -18,6 +18,29 @@ header.navbar {
 .hero {
     font-family: 'Raleway-ExtraLight', $family-sans-serif;
 
+    .hero-head {
+        background-color: #fff;
+
+        header {
+            .navbar-brand {
+                font-size: 2.5em;
+
+                img.navbar-brand-logo {
+                    height: 1.6em;
+                    max-height: 2em; // Required because Bulma sets a max-height
+                }
+            }
+
+            .kubithon-chapo {
+                color: #000;
+                font-size: 1.3em;
+                font-weight: bold;
+
+                text-align: right;
+            }
+        }
+    }
+
     .hero-body {
         text-align: center;
 
@@ -34,33 +57,114 @@ header.navbar {
                 font-size: 2em;
             }
         }
+
+        background-color: white;
+        background:
+            url('../images/bg_hero_bottomleft.png') bottom left no-repeat,
+            url('../images/bg_hero_topright.png') top right no-repeat;
+
+        @include mobile {
+            background:
+                linear-gradient(rgba(256, 256, 256, 0.8), rgba(256, 256, 256, 0.8)),
+                url('../images/bg_hero_bottomleft.png') bottom left no-repeat;
+        }
+
+        @media screen and (max-width: 1500px) {
+            background:
+                linear-gradient(rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.5)),
+                url('../images/bg_hero_bottomleft.png') bottom left no-repeat;
+        }
+    }
+
+    .hero.is-fullheight .hero-body {
+        background:
+            url('../images/bg_hero_bottomleft.png') bottom left no-repeat,
+            url('../images/bg_hero_topleft.png') top left no-repeat,
+            url('../images/bg_hero_topright.png') top right no-repeat,
+            url('../images/bg_hero_topmiddle.png') 25% -2em no-repeat;
+
+        @media screen and (max-height: 768px) {
+            margin-top: .2em;
+            background:
+                linear-gradient(rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.5)),
+                url('../images/bg_hero_bottomleft.png') bottom left no-repeat,
+                url('../images/bg_hero_topleft.png') top left no-repeat,
+                url('../images/bg_hero_topright.png') top right no-repeat;
+        }
+
+        @include mobile {
+            background:
+                    linear-gradient(rgba(256, 256, 256, 0.4), rgba(256, 256, 256, 0.4)),
+                    url('../images/bg_hero_bottomleft.png') bottom left no-repeat,
+                    url('../images/bg_hero_topleft.png') top left no-repeat;
+        }
     }
 }
 
 .main-container {
-    font-size: 1.2em;
+    font-size: 1em;
+
+    h1, h2, h3 {
+        font-family: 'Raleway-ExtraLight', $family-sans-serif;
+    }
 
     h1 {
-        margin: 1em .8em;
-
         font-size: 3.5em;
-        font-family: 'Raleway-ExtraLight', $family-sans-serif;
+    }
 
-        text-align: center;
+    h2 {
+        font-size: 2.4em;
+    }
 
-        &:after{
-            border-bottom: 1px solid #2f2f2f;
-            content: '';
-            width: 40%;
-            display: block;
-            margin: 0 auto;
-            height: 1px;
-        }
+    h3 {
+        font-size: 1.8em;
     }
 
     p {
-        font-size: 1.6em;
-        text-align: center;
-        margin: 1em .2em;
+        font-size: 1.1em;
+        margin-bottom: .6em;
+        text-align: justify;
     }
+
+    &.main-page-container {
+        font-size: 1.2em;
+
+        h1 {
+            margin: 1em .8em;
+
+            font-size: 3.5em;
+            font-family: 'Raleway-ExtraLight', $family-sans-serif;
+
+            text-align: center;
+
+            &:after{
+                border-bottom: 1px solid #2f2f2f;
+                content: '';
+                width: 40%;
+                display: block;
+                margin: 0 auto;
+                height: 1px;
+            }
+        }
+
+        p {
+            font-size: 1.5em;
+            text-align: center;
+            margin: 1em .2em;
+
+            @include mobile {
+                font-size: 1.1em;
+            }
+        }
+
+        &.shop-container {
+            p {
+                font-size: 1.2em;
+            }
+        }
+    }
+}
+
+input.input::placeholder {
+    color: #444;
 }
