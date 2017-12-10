@@ -38,7 +38,7 @@ class UpdateGainsCommand extends ContainerAwareCommand
             $content = $elem->plaintext;
             if (strpos($content, 'euro') !== false)
             {
-                $amount = trim(str_replace('&euro;', '', $content));
+                $amount = trim(str_replace(' ', '', str_replace('&euro;', '', $content)));
                 break;
             }
         }
