@@ -167,7 +167,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/ ", name="broken_link_from_telethon")
+     * @Route("/\%20", name="broken_link_from_telethon_2")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function brokenLinkFromTelethonWebsite2()
