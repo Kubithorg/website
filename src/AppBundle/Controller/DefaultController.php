@@ -156,4 +156,13 @@ class DefaultController extends Controller
     {
         return $this->redirectToRoute('homepage_update');
     }
+
+    /**
+     * @Route("/%20", name="broken_link_from_telethon")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function brokenLinkFromTelethonWebsite()
+    {
+        return $this->redirectToRoute('homepage');
+    }
 }
