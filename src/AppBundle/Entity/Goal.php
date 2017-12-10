@@ -45,7 +45,7 @@ class Goal
     /**
      * @var string
      *
-     * @ORM\Column(name="achieved_message", type="string", length=255, nullable=true)
+     * @ORM\Column(name="achieved_message", type="text", nullable=true)
      */
     private $achievedMessage = null;
 

@@ -172,6 +172,12 @@
 					}
 				}
 
+                &.previous-goal {
+                    aside {
+                        width: 15em;
+                    }
+                }
+
 				&:nth-child(2n+1) {
 					&:before {
 						top: -1.8em;

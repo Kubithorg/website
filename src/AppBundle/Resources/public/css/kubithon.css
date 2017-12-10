@@ -11866,6 +11866,9 @@ header.navbar .navbar-item a.button span.fa + span {
   margin-bottom: .6em;
   text-align: justify;
 }
+.main-container figure {
+  text-align: center;
+}
 .main-container.main-page-container {
   font-size: 1.2em;
 }
@@ -11883,6 +11886,11 @@ header.navbar .navbar-item a.button span.fa + span {
   margin: 0 auto;
   height: 1px;
 }
+@media screen and (max-width: 768px) {
+  .main-container.main-page-container h1 {
+    font-size: 2.2em;
+  }
+}
 .main-container.main-page-container p {
   font-size: 1.5em;
   text-align: center;
@@ -11891,6 +11899,9 @@ header.navbar .navbar-item a.button span.fa + span {
 @media screen and (max-width: 768px) {
   .main-container.main-page-container p {
     font-size: 1.1em;
+  }
+  .main-container.main-page-container p .button-kubithon {
+    font-size: 1.3em;
   }
 }
 .main-container.main-page-container.shop-container p {
@@ -11956,24 +11967,21 @@ input.input::placeholder {
 .donation .goals ul.progress-goals li.right-tick:before {
   left: 99%;
 }
-.donation .goals ul.progress-goals li:not(.previous-goal):not(:first-child) p.next-objective {
+.donation .goals ul.progress-goals li:nth-child(2) > span {
   display: none;
 }
-.donation .goals ul.progress-goals li:not(.previous-goal):first-child > span {
-  display: none;
-}
-.donation .goals ul.progress-goals li:not(.previous-goal):first-child aside {
+.donation .goals ul.progress-goals li:nth-child(2) aside {
   display: block;
   color: black;
 }
-.donation .goals ul.progress-goals li:not(.previous-goal):first-child aside h4 {
+.donation .goals ul.progress-goals li:nth-child(2) aside h4 {
   font-weight: bold;
 }
-.donation .goals ul.progress-goals li:not(.previous-goal):first-child aside p {
+.donation .goals ul.progress-goals li:nth-child(2) aside p {
   font-size: .666em;
   font-weight: 300;
 }
-.donation .goals ul.progress-goals li:not(.previous-goal):first-child aside p.next-objective .fa {
+.donation .goals ul.progress-goals li:nth-child(2) aside p.next-objective .fa {
   display: inline-block;
   padding-right: .6em;
 }
@@ -12022,6 +12030,9 @@ input.input::placeholder {
   background-color: #fff;
   border-color: #242423;
 }
+.donation .goals ul.progress-goals li > span:hover + aside.previous-goal {
+  width: 40%;
+}
 .donation .goals ul.progress-goals li aside {
   display: none;
 }
@@ -12031,13 +12042,13 @@ input.input::placeholder {
 .donation .goals ul.progress-goals li aside p {
   font-size: .55em;
 }
-.donation .goals ul.progress-goals li:nth-child(2n):before {
+.donation .goals ul.progress-goals li:nth-child(2n+1):before {
   top: -1.8em;
 }
-.donation .goals ul.progress-goals li:nth-child(2n) > span {
+.donation .goals ul.progress-goals li:nth-child(2n+1) > span {
   top: -2.58em;
 }
-.donation .goals ul.progress-goals li:nth-child(2n) > span:hover + aside {
+.donation .goals ul.progress-goals li:nth-child(2n+1) > span:hover + aside {
   top: -2.09em;
   left: -.22em;
 }
@@ -12057,23 +12068,10 @@ input.input::placeholder {
   padding: .3em .6em;
   background-color: #fff;
 }
-.donation a.button.is-donation {
-  display: inline-block;
-  font-size: 1em;
-  height: 3.4em;
-}
-.donation a.button.is-donation span {
-  display: block;
-  font-size: .7em;
-}
 .donation .button-kubithon {
-  font-size: 1em;
+  font-size: 1.05em;
   padding-top: 2px;
   margin-bottom: .3em;
-}
-.donation .button-kubithon-subtitle {
-  font-size: .5em;
-  font-family: "Raleway", "Raleway", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
 .hero-foot {
@@ -12103,6 +12101,21 @@ input.input::placeholder {
 .hero-foot.kubithon-home-foot .is-divider-vertical::before {
   bottom: 0;
 }
+@media screen and (max-width: 768px) {
+  .hero-foot.kubithon-home-foot .is-divider-vertical {
+    display: none;
+  }
+}
+
+section .button-kubithon {
+  font-size: 1.1em;
+  padding-top: 6px;
+  margin-bottom: .3em;
+}
+section .button-kubithon-subtitle {
+  font-size: .5em;
+  font-family: "Raleway", "Raleway", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
 
 section.list-streams .columns.is-multiline {
   margin-top: 2em;
@@ -12114,6 +12127,12 @@ section.list-streams .card p.title {
   margin-top: 0;
 }
 section.list-streams .card p.subtitle {
+  margin-bottom: 0;
+  font-size: 1.1em;
+}
+
+section.section-download .download-link {
+  margin-top: 2em;
   margin-bottom: 0;
 }
 
